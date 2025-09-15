@@ -15,6 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+
+            // Add
+            $table->string('role')->default('student'); // student | teacher | admin
+            $table->string('phone')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->string('level')->nullable(); // college | lycee | 6,5,4,3,2,1,Tle
+            $table->text('bio')->nullable();
+            $table->string('profile_photo')->nullable();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
