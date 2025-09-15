@@ -11,19 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lessons', function (Blueprint $table) {
+        Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->mediumText('content');
-            $table->string('video_url')->nullable();
-            $table->integer('duration'); // en minutes
-            $table->integer('position')->default(0);
-            $table->boolean('is_free')->false(false);
-
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->timestamp('enrolled_at')->nullable();
             $table->timestamps();
 
-            $table->unique(['course_id', 'position']); // eviter 2 lesson a la meme postion
+            $table->unique(['user_id', 'course_id']); // un eleve ne peut s'inscrire a un meme cours 2 fois
+            $table->index(['course_id', 'enrolled_at']);
         });
     }
 
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lessons');
+        Schema::dropIfExists('enrollments');
     }
 };
