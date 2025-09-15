@@ -23,9 +23,12 @@ return new class extends Migration
             $table->string('difficulty')->default('beginner'); // beginner | intermediate | advanced
             $table->integer('estimated_duration')->nullable(); // in Hour
             $table->boolean('is_published')->default(false);
+
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('subject_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            $table->index(['user_id', 'is_published']); // index pour requetes frequente
         });
     }
 
