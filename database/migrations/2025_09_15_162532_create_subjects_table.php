@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // mathematique, physque...
+            $table->string('name'); // mathematique, physque... doit etre en anglais
             $table->text('description')->nullable();
             $table->string('level')->nullable(); // college | lycee | 6,5,4,3,2,1,Tle
             $table->string('color')->default('3B82F6');
