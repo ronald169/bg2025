@@ -29,7 +29,20 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            // Add
+            'role' => 'student',
+            'phone' => fake()->phoneNumber(),
+            'date_of_birth' => fake()->dateTimeBetween('2000-01-01', '2010-01-01')->format('Y-m-d'),
+            'level' => fake()->randomElement(['college','lycee','Form 1','form 2','form 3','form 4','form five', 'lower sixth','upper sixth', 'sixième',  'cinquième', 'quatrième', 'troisième', 'seconde', 'première', 'terminale']),
+            'bio' => fake()->paragraph()
         ];
+    }
+
+    public function teacher()
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'teacher',
+        ]);
     }
 
     /**
