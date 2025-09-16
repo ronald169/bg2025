@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('lesson_id')->constrained()->onDelete('cascade');
-            $table->boolean('completed')->default(false);
+            $table->boolean('is_completed')->default(false);
             $table->integer('time_spent')->default(0);
-            $table->integer('score')->default(0); // note {type a modifier}
-            $table->timestamp('completed_at')->nullable();
+            $table->timestamp('last_accessed')->nullable();
             $table->timestamps();
 
             $table->unique(['user_id', 'lesson_id']); // progression par lesson est unique pour eviter les doublons
