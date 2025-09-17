@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('level')->nullable(); // college | lycee | 6,5,4,3,2,1,Tle
             $table->text('bio')->nullable();
             $table->string('profile_photo')->nullable();
+            $table->boolean('valid')->default(false);
 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
