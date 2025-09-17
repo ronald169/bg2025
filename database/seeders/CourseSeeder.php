@@ -18,7 +18,7 @@ class CourseSeeder extends Seeder
 
         //pour chaque teacher on cree entre 1 a 4 cours
         foreach ($teachers as $teacher) {
-            Course::factory(rand(1, 4))->create([
+            Course::factory()->count(rand(1, 4))->create([
                 'user_id' => $teacher->id,
             ]);
         }

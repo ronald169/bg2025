@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('video_url')->nullable();
             $table->integer('duration'); // en minutes
             $table->integer('position')->default(0);
-            $table->boolean('is_free')->false(false);
+            $table->boolean('is_free')->default(false);
 
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->timestamps();
