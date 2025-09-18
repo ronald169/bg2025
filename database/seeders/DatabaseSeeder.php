@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             LessonSeeder::class,
             EnrollmentSeeder::class,
-            ProgressSeeder::class
+            ProgressSeeder::class,
+            QuizSeeder::class
         ]);
     }
 }

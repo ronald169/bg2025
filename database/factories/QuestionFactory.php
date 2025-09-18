@@ -25,7 +25,7 @@ class QuestionFactory extends Factory
             'correct_answer' => $this->getCorrectAnswerBasedOnType($type),
             'points' => fake()->numberBetween(1, 5),
             'explanation' => fake()->boolean(70) ? fake()->paragraph(2) : null,
-            'quiiz_id' => Quiz::factory(),
+            'quiz_id' => Quiz::factory(),
             'created_at' => fake()->dateTimeBetween('-6 months', 'now'),
             'updated_at' => fake()->dateTimeBetween('-6 months', 'now'),
         ];
