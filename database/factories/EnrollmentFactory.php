@@ -21,7 +21,7 @@ class EnrollmentFactory extends Factory
         return [
             'user_id' => User::factory(),
             'course_id' => Course::factory(),
-            'enrolled_at' => fake()->dateTimeBetween('-1 years', 'now')
+            'completed_at' => fake()->dateTimeBetween('-1 years', 'now')
         ];
     }
 }

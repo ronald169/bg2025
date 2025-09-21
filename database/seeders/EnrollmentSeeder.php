@@ -28,7 +28,7 @@ class EnrollmentSeeder extends Seeder
                     'user_id' => $student->id,
                     'course_id' => $course->id
                     ],
-                    ['enrolled_at' => now()->subDays(rand(0, 365))]
+                    ['completed_at' => now()->subDays(rand(0, 365))]
                 );
             }
         }
