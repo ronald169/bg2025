@@ -26,7 +26,7 @@ class ProgressSeeder extends Seeder
 
                 $completed = fake()->boolean(40);
 
-                Progress::create([
+                Progress::factory()->create([
                     'user_id' => $enrollment->user_id,
                     'lesson_id' => $lesson->id,
                     'is_completed' => $completed,

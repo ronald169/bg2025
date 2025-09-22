@@ -23,7 +23,7 @@ class ProgressFactory extends Factory
         return [
             'user_id' => User::factory(),
             'lesson_id' => Lesson::factory(),
-            'time_spent' => $is_completed ? rand(45, 200) : null,
+            'time_spent' =>  $is_completed ? fake()->numberBetween(10000, 90000) : rand(1000, 3000),
             'is_completed' => $is_completed,
             'last_accessed' => $is_completed ? fake()->dateTimeBetween('-6 months', 'now') : null,
         ];
