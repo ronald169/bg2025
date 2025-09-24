@@ -20,7 +20,7 @@ class Lesson extends Model
         'duration',
         'order',
         'is_free',
-        'course_id',
+        'course_id'
     ];
 
     protected $casts = [
