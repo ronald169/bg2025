@@ -1,0 +1,108 @@
+/* public/css/tinymce-custom.css */
+/* Ce fichier ne s'applique qu'à #tinymce-content */
+#tinymce-content {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    /* on laisse Tailwind gérer la typographie de base */
+}
+
+/* TITRES : on utilise les couleurs et tailles de Tailwind */
+#tinymce-content h1,
+#tinymce-content h2,
+#tinymce-content h3,
+#tinymce-content h4,
+#tinymce-content h5,
+#tinymce-content h6 {
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: var(--color-gray-900, #111827);
+}
+
+#tinymce-content h1 { font-size: 2rem; }
+#tinymce-content h2 { font-size: 1.5rem; }
+#tinymce-content h3 { font-size: 1.25rem; }
+#tinymce-content h4 { font-size: 1.125rem; }
+
+/* LIENS : couleur primaire Tailwind (bleu) */
+#tinymce-content a {
+    color: var(--color-primary-600, #2563eb);
+    text-decoration: underline;
+}
+#tinymce-content a:hover {
+    color: var(--color-primary-800, #1e40af);
+    text-decoration: none;
+}
+
+/* LISTES */
+#tinymce-content ul,
+#tinymce-content ol {
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* TABLEAUX : scrollable, avec bordure légère */
+#tinymce-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    display: table;
+    overflow-x: auto;
+}
+
+/* Scroll horizontal uniquement si nécessaire */
+@media (max-width: 768px) {
+    #tinymce-content table {
+        min-width: 500px;
+    }
+}
+
+#tinymce-content th,
+#tinymce-content td {
+    border: 1px solid var(--color-gray-300, #d1d5db);
+    padding: 0.5rem;
+    text-align: left;
+}
+#tinymce-content th {
+    background-color: var(--color-gray-100, #f3f4f6);
+    font-weight: 600;
+}
+
+/* BLOC DE CITATION */
+#tinymce-content blockquote {
+    border-left: 4px solid var(--color-gray-400, #9ca3af);
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--color-gray-700, #374151);
+    margin: 1rem 0;
+}
+
+/* IMAGES */
+#tinymce-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1.5rem auto;
+    display: block;
+}
+
+/* CODE */
+#tinymce-content code {
+    background-color: var(--color-gray-100, #f3f4f6);
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+}
+#tinymce-content pre {
+    background-color: var(--color-gray-900, #111827);
+    color: var(--color-gray-100, #f3f4f6);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+}
+#tinymce-content pre code {
+    background: none;
+    color: inherit;
+}
