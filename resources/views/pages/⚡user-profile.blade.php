@@ -58,7 +58,7 @@ class extends Component {
                     </div>
 
                     <div class="flex flex-wrap gap-2">
-                        <x-badge :value="ucfirst($user->role)" :class="match($user->role) {
+                        <x-badge :value="__(ucfirst($user->role))" :class="match($user->role) {
                             'admin' => 'badge-error',
                             'teacher' => 'badge-info',
                             'student' => 'badge-success',
@@ -129,7 +129,7 @@ class extends Component {
 
             {{-- Student Information --}}
             @if($user->role === 'student')
-                <x-card title="{{ __('Learning Information') }}" icon="o-academic-cap" class="shadow-sm">
+                <x-card title="{!! __('Learning Information') !!}" icon="o-academic-cap" class="shadow-sm">
                     <div class="space-y-3">
                         <div class="flex justify-between pb-2 border-b">
                             <span class="font-medium">{{ __('German level') }}:</span>

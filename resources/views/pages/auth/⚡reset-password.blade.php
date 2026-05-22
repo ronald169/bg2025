@@ -157,12 +157,12 @@ class extends Component {
                         <a href="{{ route('login') }}"
                            wire:navigate
                            class="text-sm text-[#FF6B35] hover:text-[#E55A2A] hover:underline transition-colors">
-                            ← {{ __('Back to login') }}
+                            {{ __('Back to login') }}
                         </a>
 
                         <x-button
                             type="submit"
-                            label="{{ __('Reset Password →') }}"
+                            label="{{ __('Reset Password') }}"
                             class="px-6 shadow-lg btn-primary"
                             spinner="resetPassword" />
                     </div>

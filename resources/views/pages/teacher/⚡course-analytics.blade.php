@@ -150,7 +150,7 @@ class extends Component {
             <x-stat title="{{ __('Students') }}" :value="$stats['total_students']" icon="o-users" class="text-primary" />
             <x-stat title="{{ __('Lessons') }}" :value="$stats['total_lessons']" icon="o-book-open" class="text-success" />
             <x-stat title="{{ __('Avg Progress') }}" :value="$stats['avg_student_progress'] . '%'" icon="o-chart-bar" class="text-info" />
-            <x-stat title="{{ __('Quiz Pass Rate') }}" :value="$stats['quiz_pass_rate'] . '%'" icon="o-document-text" class="text-secondary" />
+            <x-stat title="{!! __('Quiz Pass Rate') !!}" :value="$stats['quiz_pass_rate'] . '%'" icon="o-document-text" class="text-secondary" />
         </div>
 
         {{-- Enrollment Growth Chart (simple bar) --}}
@@ -175,7 +175,7 @@ class extends Component {
         </x-card>
 
         {{-- Lesson Completion Rate --}}
-        <x-card title="{{ __('Lesson Completion Rate') }}" icon="o-check-circle" class="mb-8 shadow-sm">
+        <x-card title="{!! __('Lesson Completion Rate') !!}" icon="o-check-circle" class="mb-8 shadow-sm">
             <div class="space-y-4">
                 @foreach($lessonCompletion as $lesson)
                     <div>

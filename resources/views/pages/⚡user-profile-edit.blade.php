@@ -36,12 +36,12 @@ class extends Component {
     public function getGermanLevelsProperty()
     {
         return [
-            ['id' => 'A1', 'name' => 'A1 - Beginner'],
-            ['id' => 'A2', 'name' => 'A2 - Elementary'],
-            ['id' => 'B1', 'name' => 'B1 - Intermediate'],
-            ['id' => 'B2', 'name' => 'B2 - Upper Intermediate'],
-            ['id' => 'C1', 'name' => 'C1 - Advanced'],
-            ['id' => 'C2', 'name' => 'C2 - Mastery'],
+            ['id' => 'A1', 'name' => __('A1 - Beginner')],
+            ['id' => 'A2', 'name' => __('A2 - Elementary')],
+            ['id' => 'B1', 'name' => __('B1 - Intermediate')],
+            ['id' => 'B2', 'name' => __('B2 - Upper Intermediate')],
+            ['id' => 'C1', 'name' => __('C1 - Advanced')],
+            ['id' => 'C2', 'name' => __('C2 - Mastery')],
         ];
     }
 
@@ -121,10 +121,10 @@ class extends Component {
 
                 {{-- Form fields --}}
                 <div class="grid gap-4 md:grid-cols-2">
-                    <x-input wire:model="name" label="{{ __('Full name') }} *" required />
-                    <x-input wire:model="email" label="{{ __('Email') }} *" type="email" required />
+                    <x-input wire:model="name" label="{{ __('Full name') }}" required />
+                    <x-input wire:model="email" label="{{ __('Email') }}" type="email" required />
                     <x-input wire:model="phone" label="{{ __('Phone') }}" />
-                    <x-select wire:model="german_level" label="{{ __('German level') }}" :options="$germanLevels" option-value="id" option-label="name" />
+                    <x-select wire:model="german_level" label="{!! __('German level') !!}" :options="$germanLevels" option-value="id" option-label="name" />
                 </div>
                 <x-textarea wire:model="bio" label="{{ __('Bio') }}" rows="3" placeholder="{{ __('Tell something about yourself...') }}" />
 

@@ -320,7 +320,7 @@ class extends Component {
                                 <div><span class="font-medium">{{ __('Free trial') }}</span><p class="text-xs text-base-content/60">{{ __('New users get trial days') }}</p></div>
                                 <input type="checkbox" wire:model="enable_free_trial" class="toggle toggle-primary" />
                             </label>
-                            <x-input wire:model="free_trial_days" type="number" min="0" max="30" label="{{ __('Trial days') }}" placeholder="7" icon="o-calendar" />
+                            <x-input wire:model="free_trial_days" type="number" min="0" max="30" label="{!! __('Trial days') !!}" placeholder="7" icon="o-calendar" />
                         </div>
                         <div class="pt-4">
                             <h3 class="mb-3 font-medium">{{ __('Stripe Integration') }}</h3>
@@ -358,13 +358,13 @@ class extends Component {
                             <x-input wire:model="mail_port" type="number" label="{{ __('SMTP Port') }}" placeholder="587" icon="o-numbered-list" />
                         </div>
                         <div class="grid gap-4 md:grid-cols-2">
-                            <x-input wire:model="mail_username" label="{{ __('SMTP Username') }}" placeholder="user@example.com" icon="o-user" />
+                            <x-input wire:model="mail_username" label="{!! __('SMTP Username') !!}" placeholder="user@example.com" icon="o-user" />
                             <x-input wire:model="mail_password" type="password" label="{{ __('SMTP Password') }}" placeholder="••••••••" icon="o-key" />
                         </div>
                         <div class="grid gap-4 md:grid-cols-2">
                             <x-select wire:model="mail_encryption" label="{{ __('Encryption') }}" :options="[['id' => 'tls', 'name' => 'TLS'], ['id' => 'ssl', 'name' => 'SSL']]" option-value="id" option-label="name" icon="o-lock-closed" />
-                            <x-input wire:model="mail_from_address" type="email" label="{{ __('From email') }}" placeholder="noreply@example.com" icon="o-envelope" required />
-                            <x-input wire:model="mail_from_name" label="{{ __('From name') }}" placeholder="AllemandExpress" icon="o-user" required />
+                            <x-input wire:model="mail_from_address" type="email" label="{!! __('From email') !!}" placeholder="noreply@example.com" icon="o-envelope" required />
+                            <x-input wire:model="mail_from_name" label="{!! __('From name') !!}" placeholder="AllemandExpress" icon="o-user" required />
                         </div>
                     </div>
                 </x-card>

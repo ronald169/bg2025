@@ -98,46 +98,46 @@ class extends Component {
 
         $skillsByLevel = [
             'A1' => [
-                ['name' => 'Basic Vocabulary', 'icon' => 'o-book-open', 'description' => 'First German words and sentences'],
-                ['name' => 'Simple Grammar', 'icon' => 'o-pencil', 'description' => 'Articles, present tense verbs'],
-                ['name' => 'Sentence Structure', 'icon' => 'o-chart-bar', 'description' => 'Main clauses and simple subordinate clauses'],
-                ['name' => 'Pronunciation', 'icon' => 'o-microphone', 'description' => 'Sounds and stress'],
-                ['name' => 'Everyday Communication', 'icon' => 'o-chat-bubble-left-right', 'description' => 'Introducing yourself, numbers, time'],
+                ['name' => __('Basic Vocabulary'), 'icon' => 'o-book-open', 'description' => __('First German words and sentences')],
+                ['name' => __('Simple Grammar'), 'icon' => 'o-pencil', 'description' => __('Articles, present tense verbs')],
+                ['name' => __('Sentence Structure'), 'icon' => 'o-chart-bar', 'description' => __('Main clauses and simple subordinate clauses')],
+                ['name' => __('Pronunciation'), 'icon' => 'o-microphone', 'description' => __('Sounds and stress')],
+                ['name' => __('Everyday Communication'), 'icon' => 'o-chat-bubble-left-right', 'description' => __('Introducing yourself, numbers, time')],
             ],
             'A2' => [
-                ['name' => 'Expanded Vocabulary', 'icon' => 'o-book-open', 'description' => 'Daily topics and situations'],
-                ['name' => 'Past Tense', 'icon' => 'o-pencil', 'description' => 'Perfekt and Präteritum'],
-                ['name' => 'Subordinate Clauses', 'icon' => 'o-chart-bar', 'description' => 'Because, that, if, when'],
-                ['name' => 'Listening Comprehension', 'icon' => 'o-microphone', 'description' => 'Understand simple conversations'],
-                ['name' => 'Letter Writing', 'icon' => 'o-document-text', 'description' => 'Personal and formal letters'],
+                ['name' => __('Expanded Vocabulary'), 'icon' => 'o-book-open', 'description' => __('Daily topics and situations')],
+                ['name' => __('Past Tense'), 'icon' => 'o-pencil', 'description' => __('Perfekt and Präteritum')],
+                ['name' => __('Subordinate Clauses'), 'icon' => 'o-chart-bar', 'description' => __('Because, that, if, when')],
+                ['name' => __('Listening Comprehension'), 'icon' => 'o-microphone', 'description' => __('Understand simple conversations')],
+                ['name' => __('Letter Writing'), 'icon' => 'o-document-text', 'description' => __('Personal and formal letters')],
             ],
             'B1' => [
-                ['name' => 'Intermediate Vocabulary', 'icon' => 'o-book-open', 'description' => 'Abstract topics and discussions'],
-                ['name' => 'Subjunctive II', 'icon' => 'o-pencil', 'description' => 'Polite forms and wishes'],
-                ['name' => 'Passive Voice', 'icon' => 'o-chart-bar', 'description' => 'Process and state passive'],
-                ['name' => 'Reading Comprehension', 'icon' => 'o-document-text', 'description' => 'Understand longer texts'],
-                ['name' => 'Discussions', 'icon' => 'o-chat-bubble-left-right', 'description' => 'Express and justify opinions'],
+                ['name' => __('Intermediate Vocabulary'), 'icon' => 'o-book-open', 'description' => __('Abstract topics and discussions')],
+                ['name' => __('Subjunctive II'), 'icon' => 'o-pencil', 'description' => __('Polite forms and wishes')],
+                ['name' => __('Passive Voice'), 'icon' => 'o-chart-bar', 'description' => __('Process and state passive')],
+                ['name' => __('Reading Comprehension'), 'icon' => 'o-document-text', 'description' => __('Understand longer texts')],
+                ['name' => __('Discussions'), 'icon' => 'o-chat-bubble-left-right', 'description' => __('Express and justify opinions')],
             ],
             'B2' => [
-                ['name' => 'Advanced Vocabulary', 'icon' => 'o-book-open', 'description' => 'Technical language and idioms'],
-                ['name' => 'Subjunctive I', 'icon' => 'o-pencil', 'description' => 'Indirect speech'],
-                ['name' => 'Nominalization', 'icon' => 'o-chart-bar', 'description' => 'Turning verbs into nouns'],
-                ['name' => 'Stylistics', 'icon' => 'o-document-text', 'description' => 'Formal and informal texts'],
-                ['name' => 'Presentations', 'icon' => 'o-presentation-chart', 'description' => 'Giving presentations'],
+                ['name' => __('Advanced Vocabulary'), 'icon' => 'o-book-open', 'description' => __('Technical language and idioms')],
+                ['name' => __('Subjunctive I'), 'icon' => 'o-pencil', 'description' => __('Indirect speech')],
+                ['name' => __('Nominalization'), 'icon' => 'o-chart-bar', 'description' => __('Turning verbs into nouns')],
+                ['name' => __('Stylistics'), 'icon' => 'o-document-text', 'description' => __('Formal and informal texts')],
+                ['name' => __('Presentations'), 'icon' => 'o-presentation-chart', 'description' => __('Giving presentations')],
             ],
             'C1' => [
-                ['name' => 'Academic Language', 'icon' => 'o-book-open', 'description' => 'Academic vocabulary'],
-                ['name' => 'Complex Syntax', 'icon' => 'o-pencil', 'description' => 'Nested sentences'],
-                ['name' => 'Rhetoric', 'icon' => 'o-microphone', 'description' => 'Persuasive argumentation'],
-                ['name' => 'Literary Analysis', 'icon' => 'o-document-text', 'description' => 'Interpret literary texts'],
-                ['name' => 'Debates', 'icon' => 'o-chat-bubble-left-right', 'description' => 'Lead complex discussions'],
+                ['name' => __('Academic Language'), 'icon' => 'o-book-open', 'description' => __('Academic vocabulary')],
+                ['name' => __('Complex Syntax'), 'icon' => 'o-pencil', 'description' => __('Nested sentences')],
+                ['name' => __('Rhetoric'), 'icon' => 'o-microphone', 'description' => __('Persuasive argumentation')],
+                ['name' => __('Literary Analysis'), 'icon' => 'o-document-text', 'description' => __('Interpret literary texts')],
+                ['name' => __('Debates'), 'icon' => 'o-chat-bubble-left-right', 'description' => __('Lead complex discussions')],
             ],
             'C2' => [
-                ['name' => 'Nuances', 'icon' => 'o-book-open', 'description' => 'Subtleties of language'],
-                ['name' => 'Style Variations', 'icon' => 'o-pencil', 'description' => 'Different registers'],
-                ['name' => 'Language Intuition', 'icon' => 'o-sparkles', 'description' => 'Intuitive language understanding'],
-                ['name' => 'Creative Writing', 'icon' => 'o-document-text', 'description' => 'Write your own texts'],
-                ['name' => 'Native Level', 'icon' => 'o-trophy', 'description' => 'Fluent like a native speaker'],
+                ['name' => __('Nuances'), 'icon' => 'o-book-open', 'description' => __('Subtleties of language')],
+                ['name' => __('Style Variations'), 'icon' => 'o-pencil', 'description' => __('Different registers')],
+                ['name' => __('Language Intuition'), 'icon' => 'o-sparkles', 'description' => __('Intuitive language understanding')],
+                ['name' => __('Creative Writing'), 'icon' => 'o-document-text', 'description' => __('Write your own texts')],
+                ['name' => __('Native Level'), 'icon' => 'o-trophy', 'description' => __('Fluent like a native speaker')],
             ],
         ];
 
@@ -177,29 +177,29 @@ class extends Component {
 
         return [
             [
-                'name' => 'First Steps',
-                'description' => 'First lesson completed',
+                'name' => __('First Steps'),
+                'description' => __('First lesson completed'),
                 'icon' => 'o-rocket-launch',
                 'progress' => min(100, Progress::where('user_id', $this->user->id)->count() * 20),
                 'unlocked' => Progress::where('user_id', $this->user->id)->exists(),
             ],
             [
-                'name' => 'Learning Streak',
-                'description' => 'Studied 7 days in a row',
+                'name' => __('Learning Streak'),
+                'description' => __('Studied 7 days in a row'),
                 'icon' => 'o-fire',
                 'progress' => round(min(100, (($streak->current_streak ?? 0) / 7) * 100)),
                 'unlocked' => ($streak->current_streak ?? 0) >= 7,
             ],
             [
-                'name' => 'Course Master',
-                'description' => 'Completed an entire course',
+                'name' => __('Course Master'),
+                'description' => __('Completed an entire course'),
                 'icon' => 'o-trophy',
                 'progress' => min(100, $completedCourses * 100),
                 'unlocked' => $completedCourses >= 1,
             ],
             [
-                'name' => 'Study Time',
-                'description' => 'Reached 10 hours of study time',
+                'name' => __('Study Time'),
+                'description' => __('Reached 10 hours of study time'),
                 'icon' => 'o-clock',
                 'progress' => min(100, ($totalStudyTime / 600) * 100),
                 'unlocked' => $totalStudyTime >= 600,
@@ -224,11 +224,11 @@ class extends Component {
     private function getRecommendationReason($course): string
     {
         $reasons = [
-            '🇩🇪 Perfect for your level ' . ($this->user->german_level ?? 'A1'),
-            '⭐ Popular with other learners',
-            '📚 Ideal for your learning goals',
-            '🎯 Recommended based on your progress',
-            '🚀 Next step on your learning path',
+            __('🇩🇪 Perfect for your level ') . ($this->user->german_level ?? 'A1'),
+            __('⭐ Popular with other learners'),
+            __('📚 Ideal for your learning goals'),
+            __('🎯 Recommended based on your progress'),
+            __('🚀 Next step on your learning path'),
         ];
         return $reasons[array_rand($reasons)];
     }
@@ -243,12 +243,12 @@ class extends Component {
     public function getLevelLabel($level): string
     {
         $levels = [
-            'A1' => 'A1 - Beginner',
-            'A2' => 'A2 - Elementary',
-            'B1' => 'B1 - Intermediate',
-            'B2' => 'B2 - Upper Intermediate',
-            'C1' => 'C1 - Advanced',
-            'C2' => 'C2 - Mastery',
+            'A1' => __('A1 - Beginner'),
+            'A2' => __('A2 - Elementary'),
+            'B1' => __('B1 - Intermediate'),
+            'B2' => __('B2 - Upper Intermediate'),
+            'C1' => __('C1 - Advanced'),
+            'C2' => __('C2 - Mastery'),
         ];
         return $levels[$level] ?? $level;
     }
@@ -374,7 +374,7 @@ class extends Component {
                                                         <span class="text-sm font-medium">{{ __('Completed') }}</span>
                                                     </div>
                                                 @else
-                                                    <x-button label="{{ __('Continue →') }}" icon="o-play" link="{{ route('student.course.show', $course) }}" class="btn-primary btn-sm" />
+                                                    <x-button label="{{ __('Continue') }}" icon="o-play" link="{{ route('student.course.show', $course) }}" class="btn-primary btn-sm" />
                                                 @endif
                                             </div>
                                         </div>
@@ -389,7 +389,7 @@ class extends Component {
                     <x-icon name="o-map" class="w-16 h-16 mx-auto mb-4 text-base-content/30" />
                     <h3 class="mb-2 text-xl font-semibold">{{ __('Your learning path awaits!') }}</h3>
                     <p class="mb-6 text-base-content/60">{{ __('Enroll in your first course to get started.') }}</p>
-                    <x-button link="{{ route('student.catalog') }}" label="{{ __('Discover courses →') }}" class="btn-primary" />
+                    <x-button link="{{ route('student.catalog') }}" label="{{ __('Discover courses') }}" class="btn-primary" />
                 </x-card>
             @endif
 
@@ -481,7 +481,7 @@ class extends Component {
                                 <p class="mb-2 text-sm text-base-content/70">{{ $course->reason }}</p>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-1"><x-icon name="o-star" class="w-4 h-4 text-warning" /><span class="text-sm">{{ number_format($course->reviews_avg_rating ?? 0, 1) }}</span></div>
-                                    <x-button label="{{ __('View →') }}" link="{{ route('student.course.show', $course) }}" class="btn-primary btn-sm" />
+                                    <x-button label="{{ __('View') }}" link="{{ route('student.course.show', $course) }}" class="btn-primary btn-sm" />
                                 </div>
                             </div>
                         </x-card>

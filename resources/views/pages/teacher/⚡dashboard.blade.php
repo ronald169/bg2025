@@ -164,7 +164,7 @@ class extends Component {
         {{-- Header --}}
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl font-bold md:text-3xl">📊 {{ __('Teacher Dashboard') }}</h1>
+                <h1 class="text-2xl font-bold md:text-3xl">👨‍🏫 {{ __('Teacher Dashboard') }}</h1>
                 <p class="mt-1 text-sm text-base-content/70">{{ $this->getGreeting() }}, {{ $user->name }}! 👋</p>
             </div>
             <x-button label="{{ __('Create new course') }}" icon="o-plus-circle" link="{{ route('teacher.courses.create') }}" class="btn-primary" />
@@ -191,7 +191,7 @@ class extends Component {
                             <p class="text-sm text-info/80">{{ __('You have :count new message(s)', ['count' => $pendingMessages]) }}</p>
                         </div>
                     </div>
-                    <x-button label="{{ __('View messages →') }}" link="{{ route('teacher.messages') }}" class="btn-outline btn-sm" />
+                    <x-button label="{{ __('View messages') }}" link="{{ route('teacher.messages') }}" class="btn-outline btn-sm" />
                 </div>
             </div>
         @endif
@@ -204,7 +204,7 @@ class extends Component {
                     <h2 class="font-semibold">{{ __('My Courses') }}</h2>
                 </div>
                 @if($recentCourses->count() > 0)
-                    <a href="{{ route('teacher.courses') }}" class="text-sm text-primary hover:underline">{{ __('All courses →') }}</a>
+                    <a href="{{ route('teacher.courses') }}" class="text-sm text-primary hover:underline">{{ __('All courses') }}</a>
                 @endif
             </div>
 
@@ -240,7 +240,7 @@ class extends Component {
                     <x-icon name="o-academic-cap" class="w-16 h-16 mx-auto mb-4 text-base-content/30" />
                     <h3 class="mb-2 text-lg font-semibold">{{ __('No courses yet') }}</h3>
                     <p class="mb-4 text-base-content/60">{{ __('Create your first course to get started.') }}</p>
-                    <x-button link="{{ route('teacher.courses.create') }}" label="{{ __('Create first course →') }}" class="btn-primary" />
+                    <x-button link="{{ route('teacher.courses.create') }}" label="{{ __('Create first course') }}" class="btn-primary" />
                 </div>
             @endif
         </x-card>

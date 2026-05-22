@@ -137,7 +137,7 @@ class extends Component {
                     label="{{ __('Bio') }}"
                     wire:model="bio"
                     rows="3"
-                    placeholder="{{ __('Short description about the user...') }}" />
+                    placeholder="{!! __('Short description about the user...') !!}" />
 
                 {{-- Actions --}}
                 <x-slot:actions>

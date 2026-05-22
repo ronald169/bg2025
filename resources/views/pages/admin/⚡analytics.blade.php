@@ -181,14 +181,14 @@ class extends Component {
 
         {{-- Key metrics cards --}}
         <div class="grid grid-cols-2 gap-4 mb-8 md:grid-cols-3 lg:grid-cols-4">
-            <x-stat title="{{ __('Total students') }}" :value="$totalStudents" icon="o-users" class="text-primary" />
-            <x-stat title="{{ __('Active students (month)') }}" :value="$activeStudents" icon="o-user-circle" class="text-success" />
-            <x-stat title="{{ __('New students (month)') }}" :value="$newStudentsThisMonth" icon="o-user-plus" class="text-info" />
-            <x-stat title="{{ __('Published courses') }}" :value="$totalCourses" icon="o-book-open" class="text-secondary" />
-            <x-stat title="{{ __('Total enrollments') }}" :value="$totalEnrollments" icon="o-clipboard-document-list" class="text-accent" />
-            <x-stat title="{{ __('Completion rate') }}" :value="$completionRate . '%'" icon="o-check-circle" class="text-warning" />
-            <x-stat title="{{ __('Avg quiz score') }}" :value="$avgQuizScore . '%'" icon="o-document-text" class="text-info" />
-            <x-stat title="{{ __('Study time') }}" :value="floor($totalStudyMinutes / 60) . 'h'" icon="o-clock" class="text-primary" />
+            <x-stat title="{!! __('Total students') !!}" :value="$totalStudents" icon="o-users" class="text-primary" />
+            <x-stat title="{!! __('Active students (month)') !!}" :value="$activeStudents" icon="o-user-circle" class="text-success" />
+            <x-stat title="{!! __('New students (month)') !!}" :value="$newStudentsThisMonth" icon="o-user-plus" class="text-info" />
+            <x-stat title="{!! __('Published courses') !!}" :value="$totalCourses" icon="o-book-open" class="text-secondary" />
+            <x-stat title="{!! __('Total enrollments') !!}" :value="$totalEnrollments" icon="o-clipboard-document-list" class="text-accent" />
+            <x-stat title="{!! __('Completion rate') !!}" :value="$completionRate . '%'" icon="o-check-circle" class="text-warning" />
+            <x-stat title="{!! __('Avg quiz score') !!}" :value="$avgQuizScore . '%'" icon="o-document-text" class="text-info" />
+            <x-stat title="{!! __('Study time') !!}" :value="floor($totalStudyMinutes / 60) . 'h'" icon="o-clock" class="text-primary" />
         </div>
 
         {{-- Charts grid --}}

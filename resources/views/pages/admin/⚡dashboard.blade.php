@@ -127,7 +127,7 @@ class extends Component {
 
         {{-- Header --}}
         <div class="mb-6">
-            <h1 class="text-xl font-bold md:text-2xl">📊 {{ __('Admin Dashboard') }}</h1>
+            <h1 class="text-xl font-bold md:text-2xl">👑 {{ __('Admin Dashboard') }}</h1>
             <p class="mt-1 text-sm text-base-content/70">{{ __('Welcome back, :name!', ['name' => auth()->user()->name]) }}</p>
         </div>
 

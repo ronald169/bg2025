@@ -47,6 +47,11 @@ return new class extends Migration
             $table->string('og_image')->nullable();
             $table->string('canonical_url')->nullable();
             $table->string('robots')->default('index,follow');
+            $table->string('twitter_title')->nullable();
+            $table->text('twitter_description')->nullable();
+            $table->string('twitter_image')->nullable();
+            $table->string('canonical_url')->nullable();
+            $table->string('robots')->default('index,follow');
 
             // Quiz associé (optionnel)
             // $table->foreignId('quiz_id')->nullable()->constrained()->onDelete('set null');

@@ -46,6 +46,7 @@ class extends Component {
         }
         $this->course = $course;
         $this->lesson = $lesson;
+
         $this->fillForm();
     }
 
@@ -63,13 +64,12 @@ class extends Component {
         $this->is_published = $this->lesson->is_published;
     }
 
-    public function updatedTitle($value): void
+    /*public function updatedTitle($value): void
     {
-        // Auto-update slug seulement s'il n'a pas été modifié manuellement
         if ($this->slug === $this->lesson->slug) {
             $this->slug = Str::slug($value);
         }
-    }
+    }*/
 
     public function update(): void
     {
@@ -150,7 +150,7 @@ class extends Component {
                         <x-input wire:model="title" label="{{ __('Lesson Title') }}" placeholder="{{ __('e.g. Introduction to German Grammar') }}" icon="o-pencil" required />
                         <x-input wire:model="slug" label="{{ __('URL Slug') }}" placeholder="{{ __('introduction-german-grammar') }}" icon="o-link" hint="{{ __('Auto-generated from title') }}" required />
                     </div>
-                    <x-textarea wire:model="description" label="{{ __('Short Description') }}" placeholder="{{ __('What will students learn in this lesson?') }}" rows="2" icon="o-document-text" />
+                    <x-textarea wire:model="description" label="{{ __('Short Description') }}" placeholder="{!! __('What will students learn in this lesson?') !!}" rows="2" icon="o-document-text" />
                     <x-input wire:model="video_url" label="{{ __('Video URL') }}" placeholder="{{ __('https://youtube.com/... or https://vimeo.com/...') }}" icon="o-video-camera" hint="{{ __('YouTube, Vimeo or other video platforms') }}" />
 
                     <div>

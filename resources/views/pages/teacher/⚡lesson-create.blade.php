@@ -133,7 +133,7 @@ class extends Component {
                         <x-input wire:model.live="title" label="{{ __('Lesson Title') }}" placeholder="{{ __('e.g. Introduction to German Grammar') }}" icon="o-pencil" required />
                         <x-input wire:model="slug" label="{{ __('URL Slug') }}" placeholder="{{ __('introduction-german-grammar') }}" icon="o-link" hint="{{ __('Auto-generated from title') }}" required />
                     </div>
-                    <x-textarea wire:model="description" label="{{ __('Short Description') }}" placeholder="{{ __('What will students learn in this lesson?') }}" rows="2" icon="o-document-text" />
+                    <x-textarea wire:model="description" label="{!! __('Short Description') !!}" placeholder="{!! __('What will students learn in this lesson?') !!}" rows="2" icon="o-document-text" />
                     <x-input wire:model="video_url" label="{{ __('Video URL') }}" placeholder="{{ __('https://youtube.com/... or https://vimeo.com/...') }}" icon="o-video-camera" hint="{{ __('YouTube, Vimeo or other video platforms') }}" />
 
                     {{-- Rich text editor (simple textarea fallback) --}}

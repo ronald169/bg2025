@@ -141,10 +141,7 @@ class extends Component {
                 <p class="mt-0.5 text-sm text-base-content/70">{{ __('Manage all platform users') }}</p>
             </div>
             <div>
-                <a href="{{ route('admin.users.create') }}" class="inline-flex items-center gap-2 px-4 py-2 text-sm text-white transition rounded-lg bg-gradient-to-r from-primary to-secondary hover:shadow-md">
-                    <x-icon name="o-plus" class="w-4 h-4" />
-                    {{ __('New User') }}
-                </a>
+                <x-button label="{{ __('New User') }}" icon="o-plus" link="{{ route('admin.users.create') }}" class="btn-primary" />
             </div>
         </div>
 
@@ -211,7 +208,7 @@ class extends Component {
                                     </td>
                                     <td class="px-4 py-3 text-sm">{{ $user->email }}</td>
                                     <td class="px-4 py-3">
-                                        <x-badge :value="ucfirst($user->role)" :class="$this->getRoleBadgeClass($user->role) . ' badge-soft'" icon="{{ $this->getRoleIcon($user->role) }}" />
+                                        <x-badge :value="__(ucfirst($user->role))" :class="$this->getRoleBadgeClass($user->role) . ' badge-soft'" icon="{{ $this->getRoleIcon($user->role) }}" />
                                     </td>
                                     <td class="px-4 py-3">
                                         @if($user->status === 'active')

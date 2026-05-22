@@ -215,20 +215,20 @@ class extends Component {
     public function getGreeting(): string
     {
         $hour = now()->hour;
-        if ($hour < 12) return 'Good morning';
-        if ($hour < 18) return 'Good afternoon';
-        return 'Good evening';
+        if ($hour < 12) return __('Good morning');
+        if ($hour < 18) return __('Good afternoon');
+        return __('Good evening');
     }
 
     public function getMotivationalMessage(): string
     {
         $streak = $this->streakData['current'];
 
-        if ($streak >= 30) return 'Incredible! ' . $streak . ' days in a row! You are a role model! 🔥';
-        if ($streak >= 7) return 'Great! ' . $streak . ' days in a row! Keep it up! 🌟';
-        if ($streak >= 3) return 'Well done! ' . $streak . ' days in a row! Keep going! 💪';
-        if ($streak > 0) return 'Good to see you again! ' . $streak . ' day(s) in a row! 📚';
-        return 'Ready for your first German lesson today? 🇩🇪';
+        if ($streak >= 30) return __('Incredible! :days days in a row! You are a role model! 🔥', ['days' => $streak]);
+        if ($streak >= 7) return __('Great! :days days in a row! Keep it up! 🌟', ['days' => $streak]);
+        if ($streak >= 3) return __('Well done! :days days in a row! Keep going! 💪', ['days' => $streak]);
+        if ($streak > 0) return __('Good to see you again! :days day(s) in a row! 📚', ['days' => $streak]);
+        return __('Ready for your first German lesson today? 🇩🇪');
     }
 
     public function render()

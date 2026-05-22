@@ -96,10 +96,10 @@ class extends Component {
         <x-card class="shadow-sm">
             <h2 class="mb-4 text-lg font-semibold">{{ __('Change password') }}</h2>
             <x-form wire:submit="updatePassword" no-separator>
-                <x-password wire:model="current_password" label="{{ __('Current password') }} *" required />
+                <x-password wire:model="current_password" label="{{ __('Current password') }}" required />
                 <div class="grid gap-4 md:grid-cols-2">
-                    <x-password wire:model="new_password" label="{{ __('New password') }} *" required hint="{{ __('Minimum 8 characters') }}" />
-                    <x-password wire:model="new_password_confirmation" label="{{ __('Confirm new password') }} *" required />
+                    <x-password wire:model="new_password" label="{{ __('New password') }}" required hint="{{ __('Minimum 8 characters') }}" />
+                    <x-password wire:model="new_password_confirmation" label="{{ __('Confirm new password') }}" required />
                 </div>
                 <x-slot:actions>
                     <div class="flex justify-end">

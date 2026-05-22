@@ -148,12 +148,12 @@ class extends Component {
     public function getGermanLevelsProperty(): array
     {
         return [
-            ['id' => 'A1', 'name' => 'A1 - Beginner', 'description' => __('Basic understanding'), 'icon' => '🌱'],
-            ['id' => 'A2', 'name' => 'A2 - Elementary', 'description' => __('Simple phrases'), 'icon' => '📖'],
-            ['id' => 'B1', 'name' => 'B1 - Intermediate', 'description' => __('Autonomy'), 'icon' => '🎯'],
-            ['id' => 'B2', 'name' => 'B2 - Upper Intermediate', 'description' => __('Fluent communication'), 'icon' => '⭐'],
-            ['id' => 'C1', 'name' => 'C1 - Advanced', 'description' => __('Advanced mastery'), 'icon' => '🏆'],
-            ['id' => 'C2', 'name' => 'C2 - Mastery', 'description' => __('Native level'), 'icon' => '👑'],
+            ['id' => 'A1', 'name' => __('A1 - Beginner'), 'description' => __('Basic understanding'), 'icon' => '🌱'],
+            ['id' => 'A2', 'name' => __('A2 - Elementary'), 'description' => __('Simple phrases'), 'icon' => '📖'],
+            ['id' => 'B1', 'name' => __('B1 - Intermediate'), 'description' => __('Autonomy'), 'icon' => '🎯'],
+            ['id' => 'B2', 'name' => __('B2 - Upper Intermediate'), 'description' => __('Fluent communication'), 'icon' => '⭐'],
+            ['id' => 'C1', 'name' => __('C1 - Advanced'), 'description' => __('Advanced mastery'), 'icon' => '🏆'],
+            ['id' => 'C2', 'name' => __('C2 - Mastery'), 'description' => __('Native level'), 'icon' => '👑'],
         ];
     }
 
@@ -259,7 +259,7 @@ class extends Component {
                     </div>
 
                     <x-textarea
-                        label="{{ __('What motivates you to learn German?') }}"
+                        label="{!! __('What motivates you to learn German?') !!}"
                         wire:model="motivation"
                         placeholder="e.g., I want to study in Germany, get my Goethe certificate..."
                         rows="2" />
@@ -353,15 +353,15 @@ class extends Component {
                 <!-- Section Conditions -->
                 <div class="pt-4 space-y-4">
                     <x-checkbox
-                        label="{{ __('I agree to the terms and privacy policy') }} "
+                        label="{!! __('I agree to the terms and privacy policy') !!}"
                         wire:model="terms_accepted" />
 
                     <x-checkbox
-                        label="{{ __('Yes, I want to receive learning tips and news') }}"
+                        label="{!! __('Yes, I want to receive learning tips and news') !!}"
                         wire:model="newsletter_subscribed" />
 
                     <x-checkbox
-                        label="{{ __('Remind me of my daily learning session') }}"
+                        label="{!! __('Remind me of my daily learning session') !!}"
                         wire:model="study_reminders" />
                 </div>
 
@@ -369,7 +369,7 @@ class extends Component {
                 <div class="pt-4">
                     <x-button
                         type="submit"
-                        label="🇩🇪 {{ __('Register →') }}"
+                        label="🇩🇪 {{ __('Register') }}"
                         class="w-full py-3 text-lg font-semibold shadow-lg btn-primary"
                         spinner="register"
                     />

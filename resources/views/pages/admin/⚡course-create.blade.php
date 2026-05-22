@@ -220,13 +220,13 @@ class extends Component {
                         <x-input wire:model="slug" label="{{ __('URL Slug') }}" placeholder="{{ __('german-a1-beginners') }}" icon="o-link" hint="{{ __('Auto-generated from title') }}" required />
                     </div>
                     <x-textarea wire:model="short_description" label="{{ __('Short Description') }}" placeholder="{{ __('A short description of the course (max 200 characters)') }}" rows="2" icon="o-document-text" />
-                    <x-textarea wire:model="description" label="{{ __('Full Description') }}" placeholder="{{ __('Detailed description of the course, learning objectives, methods, etc.') }}" rows="5" icon="o-document" required />
+                    <x-textarea wire:model="description" label="{{ __('Full Description') }}" placeholder="{!! __('Detailed description of the course, learning objectives, methods, etc.') !!}" rows="5" icon="o-document" required />
                     <div class="grid gap-4 md:grid-cols-2">
                         <x-select wire:model="subject_id" label="{{ __('Subject') }}" :options="$subjects->map(fn($s) => ['id' => $s->id, 'name' => $s->name])->toArray()" option-value="id" option-label="name" placeholder="{{ __('Select subject') }}" icon="o-academic-cap" required />
                         <x-select wire:model="teacher_id" label="{{ __('Teacher') }}" :options="$teachers->map(fn($t) => ['id' => $t->id, 'name' => $t->name . ' (' . $t->email . ')'])->toArray()" option-value="id" option-label="name" placeholder="{{ __('Select teacher') }}" icon="o-user" required />
                     </div>
                     <div class="grid gap-4 md:grid-cols-2">
-                        <x-select wire:model="level" label="{{ __('German Level') }}" :options="$levels" option-value="id" option-label="name" icon="o-chart-bar" required />
+                        <x-select wire:model="level" label="{!! __('German Level') !!}" :options="$levels" option-value="id" option-label="name" icon="o-chart-bar" required />
                         <x-input wire:model="estimated_duration" type="number" min="1" label="{{ __('Estimated Duration (minutes)') }}" placeholder="{{ __('e.g. 120') }}" icon="o-clock" hint="{{ __('Current') }}: {{ $formattedDuration }}" required />
                     </div>
                     <div class="grid gap-4 md:grid-cols-2">

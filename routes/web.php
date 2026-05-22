@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-// ==================== PAGES PUBLIQUES ====================
-Route::livewire('/', 'pages::landing-page')->name('home');
-
 // ==================== LANGUE ====================
 Route::get('/language/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'fr', 'de'])) {
@@ -39,8 +36,13 @@ Route::middleware('guest')->group(function () {
 });
 
 // ==================== ROUTES GÉNÉRALES PUBLIQUES ====================
+Route::livewire('/', 'pages::landing-page')->name('home');
 Route::livewire('/course/{course:slug}', 'pages::student.course-show')->name('student.course.show');
 Route::livewire('/course/{course:slug}/lesson/{lesson:slug}', 'pages::student.lesson-player')->name('student.lesson.show');
+Route::livewire('/catalog', 'pages::student.course-catalog')->name('student.catalog');
+Route::livewire('/quiz/{quiz}', 'pages::student.quiz')->name('student.quiz.show');
+
+
 
 // ==================== DÉCONNEXION ====================
 Route::get('/logout', function () {
@@ -75,14 +77,12 @@ Route::middleware('auth')->group(function () {
         Route::livewire('/dashboard', 'pages::student.dashboard')->name('dashboard');
 
         // Catalogue et cours
-        Route::livewire('/catalog', 'pages::student.course-catalog')->name('catalog');
         Route::livewire('/progress', 'pages::student.progress-tracker')->name('progress');
         Route::livewire('/learning-path', 'pages::student.learning-path')->name('learning-path');
         Route::livewire('/achievements', 'pages::student.achievements')->name('achievements');
 
         // Quiz
         Route::livewire('/quiz/history', 'pages::student.quiz-history')->name('quiz-history');
-        Route::livewire('/quiz/{quiz}', 'pages::student.quiz')->name('quiz.show');
         Route::livewire('/quiz/{attempt}/results', 'pages::student.quiz-results')->name('quiz.results');
 
         // Outils d'étude

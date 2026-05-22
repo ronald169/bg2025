@@ -175,7 +175,7 @@ class extends Component {
 
                         <x-button
                             type="submit"
-                            label="{{ __('Login →') }}"
+                            label="{{ __('Login') }}"
                             class="px-6 shadow-lg btn-primary"
                             spinner="login" />
                     </div>

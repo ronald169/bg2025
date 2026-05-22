@@ -43,14 +43,17 @@ class extends Component {
     public string $meta_keywords = '';
 
     // German levels
-    public array $levels = [
-        ['id' => 'A1', 'name' => 'A1 - Beginner'],
-        ['id' => 'A2', 'name' => 'A2 - Elementary'],
-        ['id' => 'B1', 'name' => 'B1 - Intermediate'],
-        ['id' => 'B2', 'name' => 'B2 - Upper Intermediate'],
-        ['id' => 'C1', 'name' => 'C1 - Advanced'],
-        ['id' => 'C2', 'name' => 'C2 - Mastery'],
-    ];
+    public function getLevelsProperty()
+    {
+        return [
+            ['id' => 'A1', 'name' => __('A1 - Beginner')],
+            ['id' => 'A2', 'name' => __('A2 - Elementary')],
+            ['id' => 'B1', 'name' => __('B1 - Intermediate')],
+            ['id' => 'B2', 'name' => __('B2 - Upper Intermediate')],
+            ['id' => 'C1', 'name' => __('C1 - Advanced')],
+            ['id' => 'C2', 'name' => __('C2 - Mastery')],
+        ];
+    }
 
     public function mount(Course $course)
     {
@@ -95,12 +98,12 @@ class extends Component {
         return "{$minutes}min";
     }
 
-    public function updatedTitle($value): void
+    /*public function updatedTitle($value): void
     {
         if ($this->slug === $this->course->slug) {
             $this->slug = Str::slug($value);
         }
-    }
+    }*/
 
     public function addRequirement(): void
     {
@@ -198,6 +201,7 @@ class extends Component {
     public function render()
     {
         return $this->view([
+            'levels' => $this->levels,
             'subjects' => $this->subjects,
             'formattedDuration' => $this->formattedDuration,
         ]);
@@ -238,10 +242,10 @@ class extends Component {
                         <x-input wire:model="slug" label="{{ __('URL Slug') }}" placeholder="{{ __('german-a1-beginners') }}" icon="o-link" hint="{{ __('Auto-generated from title') }}" required />
                     </div>
                     <x-textarea wire:model="short_description" label="{{ __('Short Description') }}" placeholder="{{ __('A short description of the course (max 200 characters)') }}" rows="2" icon="o-document-text" />
-                    <x-textarea wire:model="description" label="{{ __('Full Description') }}" placeholder="{{ __('Detailed description of the course, learning objectives, methods, etc.') }}" rows="5" icon="o-document" required />
+                    <x-textarea wire:model="description" label="{{ __('Full Description') }}" placeholder="{!! __('Detailed description of the course, learning objectives, methods, etc.') !!}" rows="5" icon="o-document" required />
                     <div class="grid gap-4 md:grid-cols-2">
                         <x-select wire:model="subject_id" label="{{ __('Subject') }}" :options="$subjects->map(fn($s) => ['id' => $s->id, 'name' => $s->name])->toArray()" option-value="id" option-label="name" placeholder="{{ __('Select subject') }}" icon="o-academic-cap" required />
-                        <x-select wire:model="level" label="{{ __('German Level') }}" :options="$levels" option-value="id" option-label="name" icon="o-chart-bar" required />
+                        <x-select wire:model="level" label="{!! __('German Level') !!}" :options="$levels" option-value="id" option-label="name" icon="o-chart-bar" required />
                     </div>
                     <div class="grid gap-4 md:grid-cols-2">
                         <x-input wire:model="estimated_duration" type="number" min="1" label="{{ __('Estimated Duration (minutes)') }}" placeholder="{{ __('e.g. 120') }}" icon="o-clock" hint="{{ __('Current') }}: {{ $formattedDuration }}" required />
@@ -353,7 +357,7 @@ class extends Component {
 
             {{-- Actions --}}
             <div class="flex flex-col justify-end gap-3 pt-4 sm:flex-row">
-                <a href="{{ route('teacher.courses') }}" class="px-4 py-2 text-center transition border rounded-lg btn-ghost">{{ __('Cancel') }}</a>
+                <x-button link="{{ route('teacher.courses') }}" label="{{ __('Cancel') }}" />
                 <x-button label="{{ __('Update Course') }}" class="btn-primary" type="submit" spinner="update" />
             </div>
         </x-form>

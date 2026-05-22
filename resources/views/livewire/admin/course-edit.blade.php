@@ -92,10 +92,10 @@ class extends Component {
 
     }
 
-    public function updatedTitle($value): void
+    /*public function updatedTitle($value): void
     {
         $this->slug = Str::slug($value);
-    }
+    }*/
 
     public function addRequirement(): void
     {
@@ -546,7 +546,7 @@ class extends Component {
                     <h2 class="font-semibold text-gray-900">{{ __('SEO Optimization') }}</h2>
                     <span class="text-xs text-gray-400">{{ __('Improve your search engine ranking') }}</span>
                 </div>
-                
+
                 <div class="space-y-4">
                     <!-- Meta Tags -->
                     <div class="grid gap-4 md:grid-cols-2">

@@ -37,38 +37,49 @@ class extends Component {
     // UI state
     public bool $showFilters = true;
 
-    // Filter options (now as array of objects with id/name)
-    public array $levels = [
-        ['id' => 'A1', 'name' => 'A1 - Beginner'],
-        ['id' => 'A2', 'name' => 'A2 - Elementary'],
-        ['id' => 'B1', 'name' => 'B1 - Intermediate'],
-        ['id' => 'B2', 'name' => 'B2 - Upper Intermediate'],
-        ['id' => 'C1', 'name' => 'C1 - Advanced'],
-        ['id' => 'C2', 'name' => 'C2 - Mastery'],
-    ];
+    public function getLevelsProperty(): array
+    {
+        return [
+            ['id' => 'A1', 'name' => __('A1 - Beginner'), 'description' => __('Basic understanding'), 'icon' => '🌱'],
+            ['id' => 'A2', 'name' => __('A2 - Elementary'), 'description' => __('Simple phrases'), 'icon' => '📖'],
+            ['id' => 'B1', 'name' => __('B1 - Intermediate'), 'description' => __('Autonomy'), 'icon' => '🎯'],
+            ['id' => 'B2', 'name' => __('B2 - Upper Intermediate'), 'description' => __('Fluent communication'), 'icon' => '⭐'],
+            ['id' => 'C1', 'name' => __('C1 - Advanced'), 'description' => __('Advanced mastery'), 'icon' => '🏆'],
+            ['id' => 'C2', 'name' => __('C2 - Mastery'), 'description' => __('Native level'), 'icon' => '👑'],
+        ];
+    }
 
-    public array $priceRanges = [
-        ['id' => 'free', 'name' => 'Free'],
-        ['id' => 'paid', 'name' => 'Premium (€)'],
-        ['id' => 'under50', 'name' => 'Under 50€'],
-        ['id' => '50to100', 'name' => '50€ - 100€'],
-        ['id' => 'over100', 'name' => 'Over 100€'],
-    ];
+    public function getPriceRangesProperty()
+    {
+        return [
+            ['id' => 'free', 'name' => __('Free')],
+            ['id' => 'paid', 'name' => __('Premium (€)')],
+            ['id' => 'under50', 'name' => __('Under 50€')],
+            ['id' => '50to100', 'name' => __('50€ - 100€')],
+            ['id' => 'over100', 'name' => __('Over 100€')],
+        ];
+    }
 
-    public array $sortOptions = [
-        ['id' => 'popular', 'name' => 'Most Popular'],
-        ['id' => 'newest', 'name' => 'Newest first'],
-        ['id' => 'price_asc', 'name' => 'Price: Low to High'],
-        ['id' => 'price_desc', 'name' => 'Price: High to Low'],
-        ['id' => 'rating', 'name' => 'Best Rating'],
-        ['id' => 'title_asc', 'name' => 'Title A-Z'],
-    ];
+    public function getSortOptionsProperty()
+    {
+        return [
+            ['id' => 'popular', 'name' => __('Most Popular')],
+            ['id' => 'newest', 'name' => __('Newest first')],
+            ['id' => 'price_asc', 'name' => __('Price: Low to High')],
+            ['id' => 'price_desc', 'name' => __('Price: High to Low')],
+            ['id' => 'rating', 'name' => __('Best Rating')],
+            ['id' => 'title_asc', 'name' => __('Title A-Z')],
+        ];
+    }
 
-    public array $difficulties = [
-        ['id' => 'beginner', 'name' => 'Beginner'],
-        ['id' => 'intermediate', 'name' => 'Intermediate'],
-        ['id' => 'advanced', 'name' => 'Advanced'],
-    ];
+    public function getDifficultiesProperty()
+    {
+        return [
+            ['id' => 'beginner', 'name' => __('Beginner')],
+            ['id' => 'intermediate', 'name' => __('Intermediate')],
+            ['id' => 'advanced', 'name' => __('Advanced')],
+        ];
+    }
 
     public function getSubjectsProperty()
     {
@@ -79,6 +90,7 @@ class extends Component {
     {
         $query = Course::where('is_published', true)
             ->with(['subject', 'teacher'])
+            ->latest()
             ->withCount(['lessons', 'enrollments'])
             ->withAvg('reviews', 'rating');
 
@@ -184,6 +196,10 @@ class extends Component {
     public function render()
     {
         return $this->view([
+            'levels' => $this->levels,
+            'difficulties' => $this->difficulties,
+            'priceRanges' => $this->priceRanges,
+            'sortOptions' => $this->sortOptions,
             'subjects' => $this->subjects,
             'courses' => $this->courses,
             'filterCount' => $this->filterCount,
@@ -192,6 +208,41 @@ class extends Component {
 };
 
 ?>
+
+{{-- SEO Meta Tags --}}
+@section('meta_title', __('Course Catalog - ') . config('app.name'))
+@section('meta_description', __('Browse our extensive collection of German courses for all levels from A1 to C2. Find the perfect course for your learning journey.'))
+@section('meta_keywords', __('German courses, learn German, A1, A2, B1, B2, C1, C2, Goethe certificate, ÖSD, TELC, ECL, TestDaF, DSH, German language learning, online German courses, free German courses, paid German courses'))
+@section('og_title', __('German Course Catalog - ') . config('app.name'))
+@section('og_description', __('Discover the best German courses for your level. Start learning German today!'))
+@section('og_image', asset('images/og-image.jpg'))
+@section('canonical_url', url()->current())
+@section('meta_robots', 'index,follow')
+
+@push('structured_data')
+@php
+    $structuredData = [
+        '@context' => 'https://schema.org',
+        '@type' => 'ItemList',
+        'name' => __('German Course Catalog'),
+        'description' => __('Complete list of German courses available'),
+        'numberOfItems' => $this->courses->total(),
+        'itemListElement' => [],
+    ];
+
+    foreach ($this->courses as $index => $course) {
+        $structuredData['itemListElement'][] = [
+            '@type' => 'ListItem',
+            'position' => $index + 1,
+            'url' => route('student.course.show', $course),
+            'name' => $course->title,
+        ];
+    }
+@endphp
+<script type="application/ld+json">
+    {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+</script>
+@endpush
 
 <div class="py-4 md:py-6" x-data="{ showFilters: @entangle('showFilters') }">
     <div class="px-3 mx-auto max-w-7xl md:px-4">

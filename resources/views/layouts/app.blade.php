@@ -22,7 +22,7 @@
     {{-- NAVBAR mobile uniquement --}}
     <x-nav sticky class="lg:hidden">
         <x-slot:brand>
-            <div class="text-xl font-bold text-primary">AllemandExpress</div>
+            <div class="text-xl font-bold text-primary"><a href="{{ route('home') }}">{{ config('app.name') }}</a></div>
         </x-slot:brand>
         <x-slot:actions>
             <label for="main-drawer" class="lg:hidden me-3">
@@ -39,7 +39,7 @@
             {{-- BRAND --}}
             <div class="px-5 pt-5">
                 <div class="text-2xl font-bold text-primary">AllemandExpress</div>
-                <div class="text-xs text-base-content/60">Deutsch lernen online</div>
+                <div class="text-xs text-base-content/60">{{ __('Deutsch lernen online') }}</div>
             </div>
 
             {{-- MENU --}}
@@ -50,10 +50,7 @@
                     <x-menu-separator />
                     <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="-mx-2 !-my-2 rounded">
                         <x-slot:actions>
-                            <form method="POST" action="{{ route('logout') }}" class="inline">
-                                @csrf
-                                <x-button icon="o-arrow-left-end-on-rectangle" class="btn-circle btn-ghost btn-xs" tooltip-left="Déconnexion" />
-                            </form>
+                            <x-button link="{{ route('logout') }}" icon="o-arrow-left-end-on-rectangle" class="btn-circle btn-ghost btn-xs" tooltip-left="{!!Str::limit(__('Logout'), 20) !!}" />
                         </x-slot:actions>
                     </x-list-item>
                     <x-menu-separator />
@@ -61,49 +58,53 @@
 
                 {{-- MENU ÉTUDIANT --}}
                 @if(auth()->user()->role === 'student')
-                    <x-menu-item title="Tableau de bord" icon="o-home" link="{{ route('student.dashboard') }}" />
-                    <x-menu-item title="Mes cours" icon="o-academic-cap" link="{{ route('student.catalog') }}" />
-                    <x-menu-item title="Progression" icon="o-chart-bar" link="{{ route('student.progress') }}" />
-                    <x-menu-item title="Parcours" icon="o-map" link="{{ route('student.learning-path') }}" />
-                    <x-menu-item title="Quiz" icon="o-document-text" link="{{ route('student.quiz-history') }}" />
-                    <x-menu-item title="Flashcards" icon="o-cpu-chip" link="{{ route('student.flashcards') }}" />
-                    <x-menu-item title="Notes" icon="o-document-text" link="{{ route('student.notes') }}" />
-                    <x-menu-item title="Messages" icon="o-chat-bubble-left" link="{{ route('student.messages') }}" />
-                    <x-menu-item title="Calendrier" icon="o-calendar" link="{{ route('student.calendar') }}" />
-                    <x-menu-item title="Certificats" icon="o-document-check" link="{{ route('student.certificates') }}" />
-                    <x-menu-item title="Réussites" icon="o-trophy" link="{{ route('student.achievements') }}" />
+                    <x-menu-item title="{{__('Dashboard')}}" icon="o-home" link="{{ route('student.dashboard') }}" />
+                    <x-menu-item title="{{__('My Courses')}}" icon="o-academic-cap" link="{{ route('student.catalog') }}" />
+                    <x-menu-item title="{{__('Progression')}}" icon="o-chart-bar" link="{{ route('student.progress') }}" />
+                    <x-menu-item title="{!! __('Learning Path') !!}" icon="o-map" link="{{ route('student.learning-path') }}" />
+                    <x-menu-item title="{{__('Quiz')}}" icon="o-document-text" link="{{ route('student.quiz-history') }}" />
+                    {{-- <x-menu-item title="{{__('Flashcards')}}" icon="o-cpu-chip" link="{{ route('student.flashcards') }}" /> --}}
+                    {{-- <x-menu-item title="{{__('Notes')}}" icon="o-document-text" link="{{ route('student.notes') }}" /> --}}
+                    <x-menu-item title="{{__('Messages')}}" icon="o-chat-bubble-left" link="{{ route('student.messages') }}" />
+                    {{-- <x-menu-item title="{{__('Calendar')}}" icon="o-calendar" link="{{ route('student.calendar') }}" /> --}}
+                    {{-- <x-menu-item title="{{__('Certificats')}}" icon="o-document-check" link="{{ route('student.certificates') }}" /> --}}
+                    <x-menu-item title="{{__('Achievement')}}" icon="o-trophy" link="{{ route('student.achievements') }}" />
                 @endif
 
                 {{-- MENU PROFESSEUR --}}
                 @if(auth()->user()->role === 'teacher')
-                    <x-menu-item title="Tableau de bord" icon="o-home" link="{{ route('teacher.dashboard') }}" />
-                    <x-menu-item title="Mes cours" icon="o-academic-cap" link="{{ route('teacher.courses') }}" />
-                    <x-menu-item title="Étudiants" icon="o-users" link="{{ route('teacher.students') }}" />
-                    {{-- <x-menu-item title="Quiz" icon="o-document-text" link="{{ route('teacher.quizzes.index') }}" /> --}}
-                    <x-menu-item title="Messages" icon="o-chat-bubble-left" link="{{ route('teacher.messages') }}" />
-                    <x-menu-item title="Calendrier" icon="o-calendar" link="{{ route('teacher.schedule') }}" />
-                    <x-menu-item title="Annonces" icon="o-megaphone" link="{{ route('teacher.announcements') }}" />
-                    <x-menu-item title="Analyses" icon="o-chart-bar" link="{{ route('teacher.analytics') }}" />
+                    <x-menu-item title="{{__('Dashboard')}}" icon="o-home" link="{{ route('teacher.dashboard') }}" />
+                    <x-menu-item title="{{__('My Courses')}}" icon="o-academic-cap" link="{{ route('teacher.courses') }}" />
+                    <x-menu-item title="{{__('Students')}}" icon="o-users" link="{{ route('teacher.students') }}" />
+                    {{-- <x-menu-item title="{{__('Quiz')}}" icon="o-document-text" link="{{ route('teacher.quizzes.index') }}" /> --}}
+                    <x-menu-item title="{{__('Messages')}}" icon="o-chat-bubble-left" link="{{ route('teacher.messages') }}" />
+                    {{-- <x-menu-item title="{{__('Calendar')}}" icon="o-calendar" link="{{ route('teacher.schedule') }}" /> --}}
+                    {{-- <x-menu-item title="{{__('Annonces')}}" icon="o-megaphone" link="{{ route('teacher.announcements') }}" /> --}}
+                    <x-menu-item title="{{__('Analyses')}}" icon="o-chart-bar" link="{{ route('teacher.analytics') }}" />
                 @endif
 
                 {{-- MENU ADMIN --}}
                 @if(auth()->user()->role === 'admin')
-                    <x-menu-item title="Tableau de bord" icon="o-home" link="{{ route('admin.dashboard') }}" />
-                    <x-menu-item title="Utilisateurs" icon="o-users" link="{{ route('admin.users') }}" />
-                    <x-menu-item title="Cours" icon="o-academic-cap" link="{{ route('admin.courses') }}" />
-                    <x-menu-item title="Inscriptions" icon="o-user-plus" link="{{ route('admin.enrollments') }}" />
-                    <x-menu-item title="Avis" icon="o-star" link="{{ route('admin.reviews') }}" />
-                    <x-menu-item title="Rapports" icon="o-chart-bar" link="{{ route('admin.reports') }}" />
-                    <x-menu-item title="Paramètres" icon="o-cog-6-tooth" link="{{ route('admin.settings') }}" />
+                    <x-menu-item title="{{__('Dashboard')}}" icon="o-home" link="{{ route('admin.dashboard') }}" />
+                    <x-menu-item title="{{__('Users')}}" icon="o-users" link="{{ route('admin.users') }}" />
+                    <x-menu-item title="{{__('Subjects')}}" icon="o-bookmark" link="{{ route('admin.subjects') }}" />
+                    <x-menu-item title="{{__('Courses')}}" icon="o-academic-cap" link="{{ route('admin.courses') }}" />
+                    <x-menu-item title="{{__('Subscriptions')}}" icon="o-user-plus" link="{{ route('admin.enrollments') }}" />
+                    {{-- <x-menu-item title="{{__('Reviews')}}" icon="o-star" link="{{ route('admin.reviews') }}" /> --}}
+                    <x-menu-item title="{{__('Analytics')}}" icon="o-chart-bar" link="{{ route('admin.analytics') }}" />
+                    <x-menu-item title="{{__('Rapports')}}" icon="o-document-text" link="{{ route('admin.reports') }}" />
+                    <x-menu-item title="{{__('Contact')}}" icon="o-envelope" link="{{ route('admin.contacts') }}" />
+                    <x-menu-item title="{{__('Settings')}}" icon="o-cog-6-tooth" link="{{ route('admin.settings') }}" />
                 @endif
 
                 {{-- Paramètres généraux (tous rôles) --}}
                 <x-menu-separator />
-                <x-menu-sub title="Paramètres" icon="o-cog-6-tooth">
-                    <x-menu-item title="Mon profil" icon="o-user" link="{{ route('profile') }}" />
-                    <x-menu-item title="Notifications" icon="o-bell" link="{{ route('settings.notifications') }}" />
-                    <x-menu-item title="Sécurité" icon="o-shield-check" link="{{ route('settings.security') }}" />
+                <x-menu-sub title="{{__('Settings')}}" icon="o-cog-6-tooth">
+                    <x-menu-item title="{{__('My Profile')}}" icon="o-user" link="{{ route('profile') }}" />
+                    {{-- <x-menu-item title="{{__('Notifications')}}" icon="o-bell" link="{{ route('settings.notifications') }}" /> --}}
+                    <x-menu-item title="{{__('Security')}}" icon="o-shield-check" link="{{ route('settings.security') }}" />
                 </x-menu-sub>
+                <x-menu-item link="{{ route('logout') }}" class="btn-warning" icon="o-arrow-left-end-on-rectangle" title="{{ __('Logout') }}" />
             </x-menu>
         </x-slot:sidebar>
 
@@ -136,7 +137,5 @@
     </x-main>
 
     <x-toast />
-    @livewireScripts
-    @stack('scripts')
 </body>
 </html>

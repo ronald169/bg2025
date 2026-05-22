@@ -53,11 +53,10 @@ class extends Component {
         ]);
 
         // Gérer l’abonnement newsletter
-        $this->toast(
+        $this->success(
             title: __('Subscribed!'),
             description: __('You are now on the list.'),
             icon: 'o-check-circle',
-            class: 'alert-success',
             timeout: 5000,
         );
         $this->email = '';
@@ -70,6 +69,39 @@ class extends Component {
     }
 
 }; ?>
+
+{{-- SEO Meta Tags --}}
+@section('meta_title', config('app.name') . ' - Learn German Online')
+@section('meta_description', 'Learn German online with interactive courses for all levels. Prepare for Goethe, ÖSD, and TELC certifications. Start your German journey today!')
+@section('meta_keywords', 'learn German, German course, Goethe certificate, ÖSD, TELC, German grammar, German vocabulary, German online')
+@section('og_title', config('app.name') . ' - Learn German Online')
+@section('og_description', 'Master the German language with our comprehensive online courses. From A1 to C2, we have the perfect course for you.')
+@section('og_image', asset('images/og-image.jpg'))
+@section('canonical_url', url('/'))
+@section('meta_robots', 'index,follow')
+
+@push('structured_data')
+@php
+    $structuredData = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebSite',
+        'name' => config('app.name'),
+        'url' => url('/'),
+        'description' => 'Learn German online with interactive courses for all levels',
+        'potentialAction' => [
+            '@type' => 'SearchAction',
+            'target' => [
+                '@type' => 'EntryPoint',
+                'urlTemplate' => url('/catalog?search={search_term_string}'),
+            ],
+            'query-input' => 'required name=search_term_string',
+        ],
+    ];
+    @endphp
+    <script type="application/ld+json">
+        {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+    </script>
+    @endpush
 
 <div x-data="{ heroAnimate: false }" x-init="setTimeout(() => heroAnimate = true, 100)">
 

@@ -4,20 +4,23 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Course;
+use App\Models\User;
 use App\Models\Enrollment;
 use Mary\Traits\Toast;
 
 new
 #[Title('Course Details')]
-#[Layout('layouts.app')]
+#[Layout('layouts.guest')]
 class extends Component {
     use Toast;
 
     public Course $course;
+    public ?User $user = null;
     public string $activeTab = 'overview';
 
     public function mount(Course $course): void
     {
+        $this->user = auth()->user();
         $this->course = $course->load(['subject', 'teacher']);
     }
 
@@ -98,6 +101,11 @@ class extends Component {
 
     public function enroll(): void
     {
+        if (!$this->user) {
+            $this->warning(__('Log in'));
+            $this->redirectRoute('login');
+            return;
+        }
         if ($this->isEnrolled) {
             $this->warning(__('You are already enrolled in this course.'));
             return;
@@ -112,6 +120,14 @@ class extends Component {
         ]);
 
         $this->success(__('Successfully enrolled in :course', ['course' => $this->course->title]));
+    }
+
+    public function formatDuration($seconds): string
+    {
+        if ($seconds < 60) return "{$seconds} sec";
+        $minutes = floor($seconds / 60);
+        $secs = $seconds % 60;
+        return $secs > 0 ? "{$minutes} min {$secs} sec" : "{$minutes} min";
     }
 
     public function continueLearning()
@@ -144,6 +160,38 @@ class extends Component {
 };
 
 ?>
+
+@section('meta_title', $this->course->meta_title ?? $this->course->title . ' - sasadf ' . config('app.name'))
+@section('meta_description', $this->course->meta_description ?? Str::limit(strip_tags($this->course->description ?? ''), 160))
+@section('meta_keywords', $this->course->meta_keywords ?? 'German course, learn German, ' . ($this->course->level ?? 'A1'))
+@section('og_title', $this->course->og_title ?? $this->course->title)
+@section('og_description', $this->course->og_description ?? strip_tags($this->course->description))
+@section('og_image', $this->course->og_image ?? ($this->course->thumbnail ? asset('storage/' . $this->course->thumbnail) : asset('images/og-image.jpg')))
+@section('canonical_url', $this->course->canonical_url ?? url()->current())
+@section('meta_robots', $this->course->robots ?? 'index,follow')
+
+@push('structured_data')
+@php
+    $structuredData = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Course',
+        'name' => $this->course->title,
+        'description' => strip_tags($this->course->description ?? ''),
+        'provider' => [
+            '@type' => 'Organization',
+            'name' => config('app.name'),
+        ],
+        'hasCourseInstance' => [
+            '@type' => 'CourseInstance',
+            'courseMode' => 'online',
+            'language' => 'de',
+        ],
+    ];
+@endphp
+<script type="application/ld+json">
+    {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+</script>
+@endpush
 
 <div class="py-4 md:py-8">
     <div class="max-w-6xl px-3 mx-auto md:px-4">
@@ -345,7 +393,7 @@ class extends Component {
                                 </div>
                                 <div class="flex items-center gap-1 text-xs text-base-content/60">
                                     <x-icon name="o-clock" class="w-3 h-3" />
-                                    <span>{{ $lesson->duration ?? '15 min' }}</span>
+                                    <span>{{ $this->formatDuration($lesson->duration) ?? '15 min' }}</span>
                                 </div>
                             </div>
                         </div>

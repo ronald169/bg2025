@@ -45,14 +45,17 @@ class extends Component {
     public $thumbnail = null;
 
     // Levels
-    public array $levels = [
-        ['id' => 'A1', 'name' => 'A1 - Beginner'],
-        ['id' => 'A2', 'name' => 'A2 - Elementary'],
-        ['id' => 'B1', 'name' => 'B1 - Intermediate'],
-        ['id' => 'B2', 'name' => 'B2 - Upper Intermediate'],
-        ['id' => 'C1', 'name' => 'C1 - Advanced'],
-        ['id' => 'C2', 'name' => 'C2 - Mastery'],
-    ];
+    public function getLevelsProperty()
+    {
+        return [
+            ['id' => 'A1', 'name' => __('A1 - Beginner')],
+            ['id' => 'A2', 'name' => __('A2 - Elementary')],
+            ['id' => 'B1', 'name' => __('B1 - Intermediate')],
+            ['id' => 'B2', 'name' => __('B2 - Upper Intermediate')],
+            ['id' => 'C1', 'name' => __('C1 - Advanced')],
+            ['id' => 'C2', 'name' => __('C2 - Mastery')],
+        ];
+    }
 
     public function getSubjectsProperty()
     {
@@ -170,6 +173,7 @@ class extends Component {
     public function render()
     {
         return $this->view([
+            'levels' => $this->levels,
             'subjects' => $this->subjects,
         ]);
     }
@@ -205,14 +209,14 @@ class extends Component {
                 </div>
                 <div class="space-y-4">
                     <div class="grid gap-4 md:grid-cols-2">
-                        <x-input wire:model="title" label="{{ __('Course Title') }}" placeholder="{{ __('e.g. German A1 for Beginners') }}" icon="o-pencil" required />
+                        <x-input wire:model.live="title" label="{{ __('Course Title') }}" placeholder="{{ __('e.g. German A1 for Beginners') }}" icon="o-pencil" required />
                         <x-input wire:model="slug" label="{{ __('URL Slug') }}" placeholder="{{ __('german-a1-beginners') }}" icon="o-link" hint="{{ __('Auto-generated from title') }}" required />
                     </div>
                     <x-textarea wire:model="short_description" label="{{ __('Short Description') }}" placeholder="{{ __('A short description of the course (max 200 characters)') }}" rows="2" icon="o-document-text" />
-                    <x-textarea wire:model="description" label="{{ __('Full Description') }}" placeholder="{{ __('Detailed description of the course, learning objectives, methods, etc.') }}" rows="5" icon="o-document" required />
+                    <x-textarea wire:model="description" label="{{ __('Full Description') }}" placeholder="{!! __('Detailed description of the course, learning objectives, methods, etc.') !!}" rows="5" icon="o-document" required />
                     <div class="grid gap-4 md:grid-cols-2">
                         <x-select wire:model="subject_id" label="{{ __('Subject') }}" :options="$subjects->map(fn($s) => ['id' => $s->id, 'name' => $s->name])->toArray()" option-value="id" option-label="name" placeholder="{{ __('Select subject') }}" icon="o-academic-cap" required />
-                        <x-select wire:model="level" label="{{ __('German Level') }}" :options="$levels" option-value="id" option-label="name" icon="o-chart-bar" required />
+                        <x-select wire:model="level" label="{!! __('German Level') !!}" :options="$levels" option-value="id" option-label="name" icon="o-chart-bar" required />
                     </div>
                     <div class="grid gap-4 md:grid-cols-2">
                         <x-input wire:model="estimated_duration" type="number" min="1" label="{{ __('Estimated Duration (minutes)') }}" placeholder="{{ __('e.g. 120') }}" icon="o-clock" hint="{{ __('Total duration of all lessons') }}" required />

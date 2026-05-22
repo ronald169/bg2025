@@ -9,7 +9,7 @@ use Mary\Traits\Toast;
 
 new
 #[Title('Quiz - German Learning')]
-#[Layout('layouts.app')]
+#[Layout('layouts.guest')]
 class extends Component {
     use Toast;
 
@@ -67,8 +67,14 @@ class extends Component {
         return isset($this->answers[$this->currentQuestionIndex]);
     }
 
-    public function startQuiz(): void
+    public function startQuiz()
     {
+        if (!auth()->check()) {
+            $this->info(__('Log in'));
+
+            return $this->redirectIntended(route('login'), true);
+        }
+
         $this->attempt = QuizAttempt::create([
             'user_id'   => auth()->id(),
             'quiz_id'   => $this->quiz->id,
@@ -238,6 +244,33 @@ class extends Component {
 
 ?>
 
+{{-- SEO Meta Tags --}}
+@section('meta_title', $this->quiz->meta_title ?? $this->quiz->title . ' - Quiz - ' . $this->quiz->lesson->course->title . ' - ' . config('app.name'))
+@section('meta_description', $this->quiz->meta_description ?? Str::limit(strip_tags($this->quiz->description ?? ''), 160))
+@section('meta_keywords', $this->quiz->meta_keywords ?? 'German quiz, ' . $this->quiz->title . ', test German, ' . ($this->quiz->lesson->course->level ?? 'A1'))
+@section('og_title', $this->quiz->og_title ?? $this->quiz->title)
+@section('og_description', $this->quiz->og_description ?? strip_tags($this->quiz->description ?? 'Test your German knowledge'))
+@section('og_image', $this->quiz->og_image ?? ($this->quiz->lesson->course->thumbnail ? asset('storage/' . $this->quiz->lesson->course->thumbnail) : asset('images/og-image.jpg')))
+@section('canonical_url', $this->quiz->canonical_url ?? url()->current())
+@section('meta_robots', $this->quiz->robots ?? 'index,follow')
+
+@push('structured_data')
+@php
+    $structuredData = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Quiz',
+        'name' => $this->quiz->title,
+        'description' => strip_tags($this->quiz->description ?? ''),
+        'educationalLevel' => $this->quiz->lesson->course->level ?? 'A1',
+        'assesses' => 'German language proficiency',
+        'numberOfQuestions' => $this->questions->count(),
+    ];
+@endphp
+<script type="application/ld+json">
+    {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+</script>
+@endpush
+
 <div class="py-4 md:py-6"
      x-data="{
          timerInterval: null,
@@ -303,7 +336,7 @@ class extends Component {
                         @endif
                     </ul>
                 </div>
-                <x-button wire:click="startQuiz" label="{{ __('Start quiz →') }}" icon="o-play" class="px-8 py-3 text-lg btn-primary" spinner />
+                <x-button wire:click="startQuiz" label="{{ __('Start quiz') }}" icon="o-play" class="px-8 py-3 text-lg btn-primary" spinner />
             </x-card>
 
         @elseif(!$quizCompleted)

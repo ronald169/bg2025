@@ -224,7 +224,7 @@ class extends Component {
                     <x-icon name="o-book-open" class="w-16 h-16 mx-auto mb-3 text-base-content/30" />
                     <h3 class="mb-2 text-lg font-semibold">{{ __('No courses yet') }}</h3>
                     <p class="mb-4 text-base-content/60">{{ __('You are not enrolled in any course yet.') }}</p>
-                    <x-button link="{{ route('student.catalog') }}" label="{{ __('Discover courses →') }}" class="btn-primary" />
+                    <x-button link="{{ route('student.catalog') }}" label="{{ __('Discover courses') }}" class="btn-primary" />
                 </x-card>
             @endif
         </div>

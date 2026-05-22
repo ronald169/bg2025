@@ -153,12 +153,12 @@ class extends Component {
                     label="{{ __('Bio') }}"
                     wire:model="bio"
                     rows="3"
-                    placeholder="{{ __('Short description about the user...') }}" />
+                    placeholder="{!! __('Short description about the user...') !!}" />
 
                 {{-- Actions --}}
                 <x-slot:actions>
                     <x-button label="{{ __('Cancel') }}" link="{{ route('admin.users') }}" class="btn-ghost" />
-                    <x-button label="{{ __('Update User') }}" class="btn-primary" type="submit" spinner="update" />
+                    <x-button label="{!! __('Update User') !!}" class="btn-primary" type="submit" spinner="update" />
                 </x-slot:actions>
             </x-form>
         </x-card>

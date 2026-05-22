@@ -112,12 +112,12 @@ class extends Component {
     public function getLevelLabel($level): string
     {
         $levels = [
-            'A1' => 'A1 - Beginner',
-            'A2' => 'A2 - Elementary',
-            'B1' => 'B1 - Intermediate',
-            'B2' => 'B2 - Upper Intermediate',
-            'C1' => 'C1 - Advanced',
-            'C2' => 'C2 - Mastery',
+            'A1' => __('A1 - Beginner'),
+            'A2' => __('A2 - Elementary'),
+            'B1' => __('B1 - Intermediate'),
+            'B2' => __('B2 - Upper Intermediate'),
+            'C1' => __('C1 - Advanced'),
+            'C2' => __('C2 - Mastery'),
         ];
         return $levels[$level] ?? $level;
     }
@@ -222,10 +222,10 @@ class extends Component {
 
                         <div class="flex flex-wrap items-center justify-between gap-2 pt-3 mt-3 border-t">
                             <div class="flex gap-1">
-                                <x-button icon="{{ $course->is_published ? 'o-eye-slash' : 'o-eye' }}" class="btn-circle btn-ghost btn-sm" tooltip-left="{{ $course->is_published ? __('Unpublish') : __('Publish') }}" wire:click="togglePublish({{ $course->id }})" />
-                                <x-button icon="o-pencil" class="btn-circle btn-ghost btn-sm" tooltip-left="{{ __('Edit Course') }}" link="{{ route('teacher.courses.edit', $course) }}" />
-                                <x-button icon="o-megaphone" class="btn-circle btn-ghost btn-sm" tooltip-left="{{ __('Announcements') }}" link="{{ route('teacher.announcements') }}?selectedCourse={{ $course->id }}" />
-                                <x-button icon="o-chart-bar" class="btn-circle text-info btn-ghost btn-sm" tooltip-left="{{ __('Course Analytics') }}" link="{{ route('teacher.courses.analytics', $course) }}" />
+                                <x-button icon="{{ $course->is_published ? 'o-eye-slash' : 'o-eye' }}" class="btn-circle btn-ghost btn-sm" tooltip-right="{{ $course->is_published ? __('Unpublish') : __('Publish') }}" wire:click="togglePublish({{ $course->id }})" />
+                                <x-button icon="o-pencil" class="btn-circle btn-ghost btn-sm" tooltip-right="{{ __('Edit Course') }}" link="{{ route('teacher.courses.edit', $course) }}" />
+                                {{-- <x-button icon="o-megaphone" class="btn-circle btn-ghost btn-sm" tooltip-left="{{ __('Announcements') }}" link="{{ route('teacher.announcements') }}?selectedCourse={{ $course->id }}" /> --}}
+                                <x-button icon="o-chart-bar" class="btn-circle text-info btn-ghost btn-sm" tooltip="{{ __('Course Analytics') }}" link="{{ route('teacher.courses.analytics', $course) }}" />
                                 <x-button icon="o-document-text" class="btn-circle btn-ghost btn-sm" tooltip-left="{{ __('Quiz Manager') }}" link="{{ route('teacher.quizzes.index', $course) }}" />
                                 <x-button icon="o-trash" class="btn-circle btn-ghost btn-sm text-error" tooltip-left="{{ __('Delete') }}" wire:click="deleteCourse({{ $course->id }})" />
                             </div>

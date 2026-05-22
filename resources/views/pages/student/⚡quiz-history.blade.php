@@ -242,7 +242,7 @@ class extends Component {
                     <x-icon name="o-document-text" class="w-16 h-16 mx-auto mb-3 text-base-content/30" />
                     <h3 class="mb-2 text-lg font-semibold text-base-content">{{ __('No quiz attempts yet') }}</h3>
                     <p class="mb-4 text-base-content/60">{{ __('Take a quiz to see your results here.') }}</p>
-                    <x-button link="{{ route('student.catalog') }}" label="{{ __('Discover courses →') }}" class="btn-primary" />
+                    <x-button link="{{ route('student.catalog') }}" label="{{ __('Discover courses') }}" class="btn-primary" />
                 </div>
             @endif
         </x-card>

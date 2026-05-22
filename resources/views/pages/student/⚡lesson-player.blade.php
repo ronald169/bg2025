@@ -11,7 +11,7 @@ use App\Traits\Seoable;
 
 new
 #[Title('Lesson - German Learning')]
-#[Layout('layouts.app')]
+#[Layout('layouts.guest')]
 class extends Component {
     use Toast, Seoable;
 
@@ -30,9 +30,12 @@ class extends Component {
         $ownedByTeacher = $this->lesson->course->teacher_id === auth()->id();
         $isAdmin = auth()->user() ? auth()->user()->isAdmin() : false;
 
-        if (!$isEnrolled && !$ownedByTeacher && !$isAdmin) {
-            abort(403, 'You must be enrolled in this course to access the lesson.');
+        if (!$this->lesson->is_free) {
+            if (!$isEnrolled && !$ownedByTeacher && !$isAdmin) {
+                abort(403, 'You must be enrolled in this course to access the lesson.');
+            }
         }
+
 
         $this->loadProgress();
     }
@@ -195,6 +198,39 @@ class extends Component {
 
 ?>
 
+{{-- SEO Meta Tags --}}
+@section('meta_title', $this->lesson->meta_title ?? $this->lesson->title . ' - ' . $this->lesson->course->title . ' - ' . config('app.name'))
+@section('meta_description', $this->lesson->meta_description ?? Str::limit(strip_tags($this->lesson->content ?? $this->lesson->description ?? ''), 160))
+@section('meta_keywords', $this->lesson->meta_keywords ?? 'German lesson, ' . $this->lesson->title . ', learn German, ' . ($this->lesson->course->level ?? 'A1'))
+@section('og_title', $this->lesson->og_title ?? $this->lesson->title)
+@section('og_description', $this->lesson->og_description ?? strip_tags($this->lesson->content ?? $this->lesson->description ?? ''))
+@section('og_image', $this->lesson->og_image ?? ($this->lesson->course->thumbnail ? asset('storage/' . $this->lesson->course->thumbnail) : asset('images/og-image.jpg')))
+@section('canonical_url', $this->lesson->canonical_url ?? url()->current())
+@section('meta_robots', $this->lesson->robots ?? 'index,follow')
+
+@push('structured_data')
+@php
+    $structuredData = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Lesson',
+        'name' => $this->lesson->title,
+        'description' => strip_tags($this->lesson->description ?? $this->lesson->content ?? ''),
+        'educationalLevel' => $this->lesson->course->level ?? 'A1',
+        'about' => 'German language',
+        'inLanguage' => 'de',
+        'isPartOf' => [
+            '@type' => 'Course',
+            'name' => $this->lesson->course->title,
+            'url' => route('student.course.show', $this->lesson->course),
+        ],
+    ];
+@endphp
+<script type="application/ld+json">
+    {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+</script>
+@endpush
+
+
 <div class="py-4 md:py-6">
     <div class="max-w-5xl px-3 mx-auto md:px-4">
 
@@ -210,7 +246,7 @@ class extends Component {
         {{-- En-tête --}}
         <div class="mb-6">
             <div class="flex flex-wrap items-center gap-2 mb-2">
-                <x-badge :value="'Lesson ' . $this->lesson->order" class="badge-primary badge-soft" />
+                <x-badge :value="__('Lesson ') . $this->lesson->order" class="badge-primary badge-soft" />
                 @if($isCompleted)
                     <x-badge value="Completed" icon="o-check-circle" class="badge-success badge-soft" />
                 @endif
@@ -235,7 +271,7 @@ class extends Component {
                         <source src="{{ $this->lesson->video_url }}" type="video/mp4">
                     </video>
                 @else
-                    <div class="text-center text-base-content/50">
+                    <div class="text-center text-white text-base-content/50">
                         <x-icon name="o-video-camera" class="w-16 h-16 mx-auto mb-3" />
                         <p>{{ __('Video coming soon') }}</p>
                     </div>
@@ -274,7 +310,7 @@ class extends Component {
                 <div class="space-y-4">
                     @if(!$isCompleted)
                         <x-button wire:click="markComplete" spinner="markComplete"
-                            label="{{ __('Complete lesson') }} ✓" icon="o-check-circle"
+                            label="{{ __('Complete lesson') }}" icon="o-check-circle"
                             class="w-full btn-success" />
                     @else
                         <div class="p-3 text-center rounded-lg bg-success/20 text-success-content">
