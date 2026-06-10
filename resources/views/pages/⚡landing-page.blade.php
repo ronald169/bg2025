@@ -62,10 +62,37 @@ class extends Component {
         $this->email = '';
     }
 
+    // Dans un composant Livewire (par exemple app/Livewire/Home.php)
+    public function getStructuredDataProperty(): string
+    {
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            'name' => config('app.name'),
+            'url' => url('/'),
+            'description' => __('Learn German online with interactive courses for all levels'),
+            'potentialAction' => [
+                '@type' => 'SearchAction',
+                'target' => [
+                    '@type' => 'EntryPoint',
+                    'urlTemplate' => url('/catalog?search={search_term_string}'),
+                ],
+                'query-input' => 'required name=search_term_string',
+            ],
+        ];
+
+        return json_encode(
+            $data,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
+    }
 
     public function render()
     {
-        return $this->view();
+        return $this->view()
+            ->layoutData([
+                'structuredData' => $this->structuredData,
+            ]);
     }
 
 }; ?>
@@ -80,28 +107,6 @@ class extends Component {
 @section('canonical_url', url('/'))
 @section('meta_robots', 'index,follow')
 
-@push('structured_data')
-@php
-    $structuredData = [
-        '@context' => 'https://schema.org',
-        '@type' => 'WebSite',
-        'name' => config('app.name'),
-        'url' => url('/'),
-        'description' => 'Learn German online with interactive courses for all levels',
-        'potentialAction' => [
-            '@type' => 'SearchAction',
-            'target' => [
-                '@type' => 'EntryPoint',
-                'urlTemplate' => url('/catalog?search={search_term_string}'),
-            ],
-            'query-input' => 'required name=search_term_string',
-        ],
-    ];
-    @endphp
-    <script type="application/ld+json">
-        {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
-    </script>
-    @endpush
 
 <div x-data="{ heroAnimate: false }" x-init="setTimeout(() => heroAnimate = true, 100)">
 

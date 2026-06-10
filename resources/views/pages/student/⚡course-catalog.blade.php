@@ -159,7 +159,7 @@ class extends Component {
         $this->success(__('All filters have been reset.'));
     }
 
-    public function updated($property): void
+    public function updated(): void
     {
         $this->resetPage();
     }
@@ -193,6 +193,33 @@ class extends Component {
         };
     }
 
+    public function getStructuredDataProperty(): string
+    {
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'ItemList',
+            'name' => __('German Course Catalog'),
+            'description' => __('Complete list of German courses available'),
+            'numberOfItems' => $this->courses->total(),
+            'itemListElement' => [],
+        ];
+
+        foreach ($this->courses as $index => $course) {
+            $data['itemListElement'][] = [
+                '@type' => 'ListItem',
+                'position' => $index + 1,
+                'url' => route('student.course.show', $course),
+                'name' => $course->title,
+            ];
+        }
+
+        return json_encode(
+            $data,
+            JSON_UNESCAPED_SLASHES |
+            JSON_UNESCAPED_UNICODE
+        );
+    }
+
     public function render()
     {
         return $this->view([
@@ -203,6 +230,9 @@ class extends Component {
             'subjects' => $this->subjects,
             'courses' => $this->courses,
             'filterCount' => $this->filterCount,
+            'structured_data' => $this->structuredData,
+        ])->layoutData([
+            'structuredData' => $this->structuredData,
         ]);
     }
 };
@@ -219,30 +249,6 @@ class extends Component {
 @section('canonical_url', url()->current())
 @section('meta_robots', 'index,follow')
 
-@push('structured_data')
-@php
-    $structuredData = [
-        '@context' => 'https://schema.org',
-        '@type' => 'ItemList',
-        'name' => __('German Course Catalog'),
-        'description' => __('Complete list of German courses available'),
-        'numberOfItems' => $this->courses->total(),
-        'itemListElement' => [],
-    ];
-
-    foreach ($this->courses as $index => $course) {
-        $structuredData['itemListElement'][] = [
-            '@type' => 'ListItem',
-            'position' => $index + 1,
-            'url' => route('student.course.show', $course),
-            'name' => $course->title,
-        ];
-    }
-@endphp
-<script type="application/ld+json">
-    {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
-</script>
-@endpush
 
 <div class="py-4 md:py-6" x-data="{ showFilters: @entangle('showFilters') }">
     <div class="px-3 mx-auto max-w-7xl md:px-4">

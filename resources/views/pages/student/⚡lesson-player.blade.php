@@ -180,6 +180,29 @@ class extends Component {
         return null;
     }
 
+    public function getStructuredDataProperty(): string
+    {
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Lesson',
+            'name' => $this->lesson->title,
+            'description' => strip_tags($this->lesson->description ?? $this->lesson->content ?? ''),
+            'educationalLevel' => $this->lesson->course->level ?? 'A1',
+            'about' => 'German language',
+            'inLanguage' => 'de',
+            'isPartOf' => [
+                '@type' => 'Course',
+                'name' => $this->lesson->course->title,
+                'url' => route('student.course.show', $this->lesson->course),
+            ],
+        ];
+
+        return json_encode(
+            $data,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
+    }
+
     public function render()
     {
         return $this->view([
@@ -192,6 +215,8 @@ class extends Component {
             'totalQuizQuestions'   => $this->totalQuizQuestions,
             'quizPercentage'       => $this->quizPercentage,
             'videoId'              => $this->getVideoId($this->lesson->video_url),
+        ])->layoutData([
+            'structuredData' => $this->structuredData,
         ]);
     }
 };
@@ -203,32 +228,10 @@ class extends Component {
 @section('meta_description', $this->lesson->meta_description ?? Str::limit(strip_tags($this->lesson->content ?? $this->lesson->description ?? ''), 160))
 @section('meta_keywords', $this->lesson->meta_keywords ?? 'German lesson, ' . $this->lesson->title . ', learn German, ' . ($this->lesson->course->level ?? 'A1'))
 @section('og_title', $this->lesson->og_title ?? $this->lesson->title)
-@section('og_description', $this->lesson->og_description ?? strip_tags($this->lesson->content ?? $this->lesson->description ?? ''))
+@section('og_description', $this->lesson->og_description ?? Str::limit(strip_tags($this->lesson->content ?? $this->lesson->description ?? ''), 160))
 @section('og_image', $this->lesson->og_image ?? ($this->lesson->course->thumbnail ? asset('storage/' . $this->lesson->course->thumbnail) : asset('images/og-image.jpg')))
 @section('canonical_url', $this->lesson->canonical_url ?? url()->current())
 @section('meta_robots', $this->lesson->robots ?? 'index,follow')
-
-@push('structured_data')
-@php
-    $structuredData = [
-        '@context' => 'https://schema.org',
-        '@type' => 'Lesson',
-        'name' => $this->lesson->title,
-        'description' => strip_tags($this->lesson->description ?? $this->lesson->content ?? ''),
-        'educationalLevel' => $this->lesson->course->level ?? 'A1',
-        'about' => 'German language',
-        'inLanguage' => 'de',
-        'isPartOf' => [
-            '@type' => 'Course',
-            'name' => $this->lesson->course->title,
-            'url' => route('student.course.show', $this->lesson->course),
-        ],
-    ];
-@endphp
-<script type="application/ld+json">
-    {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
-</script>
-@endpush
 
 
 <div class="py-4 md:py-6">

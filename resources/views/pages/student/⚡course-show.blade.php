@@ -143,6 +143,30 @@ class extends Component {
         ]);
     }
 
+    public function getStructuredDataProperty(): string
+    {
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Course',
+            'name' => $this->course->title,
+            'description' => strip_tags($this->course->description ?? ''),
+            'provider' => [
+                '@type' => 'Organization',
+                'name' => config('app.name'),
+            ],
+            'hasCourseInstance' => [
+                '@type' => 'CourseInstance',
+                'courseMode' => 'online',
+                'language' => 'de',
+            ],
+        ];
+
+        return json_encode(
+            $data,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
+    }
+
     public function render()
     {
         return $this->view([
@@ -155,6 +179,8 @@ class extends Component {
             'requirements'       => $this->requirements,
             'levelLabel'         => $this->getLevelLabel($this->course->level),
             'levelBadgeClass'    => $this->getLevelBadgeClass($this->course->level),
+        ])->layoutData([
+            'structuredData' => $this->structuredData,
         ]);
     }
 };
@@ -170,28 +196,6 @@ class extends Component {
 @section('canonical_url', $this->course->canonical_url ?? url()->current())
 @section('meta_robots', $this->course->robots ?? 'index,follow')
 
-@push('structured_data')
-@php
-    $structuredData = [
-        '@context' => 'https://schema.org',
-        '@type' => 'Course',
-        'name' => $this->course->title,
-        'description' => strip_tags($this->course->description ?? ''),
-        'provider' => [
-            '@type' => 'Organization',
-            'name' => config('app.name'),
-        ],
-        'hasCourseInstance' => [
-            '@type' => 'CourseInstance',
-            'courseMode' => 'online',
-            'language' => 'de',
-        ],
-    ];
-@endphp
-<script type="application/ld+json">
-    {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
-</script>
-@endpush
 
 <div class="py-4 md:py-8">
     <div class="max-w-6xl px-3 mx-auto md:px-4">

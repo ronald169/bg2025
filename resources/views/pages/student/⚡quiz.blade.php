@@ -228,6 +228,24 @@ class extends Component {
         return 'text-gray-700';
     }
 
+    public function getStructuredDataProperty(): string
+    {
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Quiz',
+            'name' => $this->quiz->title,
+            'description' => strip_tags($this->quiz->description ?? ''),
+            'educationalLevel' => $this->quiz->lesson->course->level ?? 'A1',
+            'assesses' => __('German language proficiency'),
+            'numberOfQuestions' => $this->questions->count(),
+        ];
+
+        return json_encode(
+            $data,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
+    }
+
     public function render()
     {
         return $this->view([
@@ -238,6 +256,8 @@ class extends Component {
             'hasAnswer'       => $this->hasAnswerForCurrent,
             'formattedTime'   => $this->getFormattedTime(),
             'timeColor'       => $this->getTimeColor(),
+        ])->layoutData([
+            'structuredData' => $this->structuredData,
         ]);
     }
 };
@@ -253,23 +273,6 @@ class extends Component {
 @section('og_image', $this->quiz->og_image ?? ($this->quiz->lesson->course->thumbnail ? asset('storage/' . $this->quiz->lesson->course->thumbnail) : asset('images/og-image.jpg')))
 @section('canonical_url', $this->quiz->canonical_url ?? url()->current())
 @section('meta_robots', $this->quiz->robots ?? 'index,follow')
-
-@push('structured_data')
-@php
-    $structuredData = [
-        '@context' => 'https://schema.org',
-        '@type' => 'Quiz',
-        'name' => $this->quiz->title,
-        'description' => strip_tags($this->quiz->description ?? ''),
-        'educationalLevel' => $this->quiz->lesson->course->level ?? 'A1',
-        'assesses' => 'German language proficiency',
-        'numberOfQuestions' => $this->questions->count(),
-    ];
-@endphp
-<script type="application/ld+json">
-    {!! json_encode($structuredData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
-</script>
-@endpush
 
 <div class="py-4 md:py-6"
      x-data="{

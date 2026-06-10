@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{!! isset($title) ? $title.' - '.config('app.name') : config('app.name') !!}</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -31,7 +30,11 @@
     <meta name="twitter:image" content="@yield('og_image', asset('images/og-image.jpg'))">
 
     {{-- Structured Data --}}
-    @yield('structured_data')
+    @if(isset($structuredData))
+        <script type="application/ld+json">
+            {!! $structuredData !!}
+        </script>
+    @endif
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
@@ -99,7 +102,8 @@
         }
     </style>
 
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BRKrW89p.css') }}">
+    <script src="{{ asset('build/assets/app-CcNNqum8.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('tinymce-custom.css') }}">
 </head>
