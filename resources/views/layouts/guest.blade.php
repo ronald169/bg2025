@@ -6,6 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{!! isset($title) ? $title.' - '.config('app.name') : config('app.name') !!}</title>
 
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
     {{-- SEO Meta Tags --}}
     <title>@yield('meta_title', config('app.name'))</title>
     <meta name="description" content="@yield('meta_description')">
@@ -96,7 +99,7 @@
         }
     </style>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
     <link rel="stylesheet" href="{{ asset('tinymce-custom.css') }}">
 </head>
@@ -107,16 +110,51 @@
 
         <x-slot:brand>
             {{-- Brand --}}
-            <div class="text-xl font-bold text-primary"><a href="{{ route('home') }}">{{ config('app.name') }}</a></div>
+            <div class="text-xl font-bold text-primary">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('/storage/images/logo.png') }}" alt="{{ config('app.name') }} logo" class="inline-block h-8 mr-2">
+                </a>
+            </div>
         </x-slot:brand>
 
         {{-- Right side actions --}}
         <x-slot:actions>
             <x-button label="{{ __('Courses') }}" icon="o-academic-cap" link="{{ route('student.catalog') }}" class="btn-ghost btn-sm" responsive />
+
+            <x-dropdown class="dropdown-end">
+                {{-- Bouton déclencheur --}}
+                <x-slot:trigger>
+                    <button class="btn btn-ghost btn-circle">
+                        @switch(app()->getLocale())
+                            @case('fr')
+                                🇫🇷
+                                @break
+                            @case('en')
+                                🇬🇧
+                                @break
+                            @default
+                                🇩🇪
+                        @endswitch
+                    </button>
+                </x-slot:trigger>
+
+                {{-- Menu des langues --}}
+                <x-menu>
+                    <x-menu-item title="Français" icon="o-flag" link="{{ route('language.switch', 'fr') }}" />
+                    <x-menu-item title="English" icon="o-flag" link="{{ route('language.switch', 'en') }}" />
+                    <x-menu-item title="Deutsch"  icon="o-flag" link="{{ route('language.switch', 'de') }}" />
+                </x-menu>
+            </x-dropdown>
+
             @if (!auth()->check())
                 <x-button label="{{ __('Login') }}" icon="o-user" link="{{ route('login') }}" class="btn-ghost btn-sm" responsive />
             @else
-                <x-button label="{{ __('Logout') }}" icon="o-arrow-left-end-on-rectangle" link="{{ route('logout') }}" class="btn-ghost btn-sm" responsive />
+                <x-dropdown label="{{ auth()->user()->name }}" class="btn-ghost btn-sm" >
+
+                    <x-menu-item title="{{ __('Dashboard') }}" link="{{ route('dashboard.redirect') }}" />
+                <x-menu-item title="{{ __('Logout') }}" icon="o-arrow-left-end-on-rectangle" link="{{ route('logout') }}" />
+                </x-dropdown>
+
             @endif
         </x-slot:actions>
     </x-nav>

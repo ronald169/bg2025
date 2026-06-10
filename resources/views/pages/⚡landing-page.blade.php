@@ -76,7 +76,7 @@ class extends Component {
 @section('meta_keywords', 'learn German, German course, Goethe certificate, ÖSD, TELC, German grammar, German vocabulary, German online')
 @section('og_title', config('app.name') . ' - Learn German Online')
 @section('og_description', 'Master the German language with our comprehensive online courses. From A1 to C2, we have the perfect course for you.')
-@section('og_image', asset('images/og-image.jpg'))
+@section('og_image', asset('/images/og-image.jpg'))
 @section('canonical_url', url('/'))
 @section('meta_robots', 'index,follow')
 
@@ -107,37 +107,42 @@ class extends Component {
 
     {{-- ==================== HERO SECTION (texte animé + image à droite) ==================== --}}
     <section class="relative overflow-hidden bg-gradient-to-br from-primary/5 via-base-100 to-secondary/5">
-        <div class="container px-4 py-20 mx-auto md:py-32">
-            <div class="flex flex-col items-center gap-12 lg:flex-row">
-                <div class="flex-1 text-center lg:text-left" x-show="heroAnimate" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-y-10" x-transition:enter-end="opacity-100 translate-y-0">
-                    <h1 class="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+        <div class="container px-4 py-16 mx-auto md:py-24">
+            <div class="flex flex-col items-center gap-10 lg:flex-row">
+                <!-- Texte : occupe 2/5 sur desktop -->
+                <div class="flex-1 text-center lg:text-left lg:w-5/12" x-show="heroAnimate" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-y-10" x-transition:enter-end="opacity-100 translate-y-0">
+                    <h1 class="text-3xl font-bold leading-tight md:text-4xl lg:text-4xl xl:text-6xl">
                         {{ __('Master German') }} <span class="text-primary">{{ __('fast') }}</span><br>
                         {{ __('with AllemandExpress') }}
                     </h1>
-                    <p class="max-w-2xl mx-auto mt-6 text-lg md:text-xl text-base-content/70 lg:mx-0">
+                    <p class="max-w-2xl mx-auto mt-4 text-base md:text-lg text-base-content/70 lg:mx-0">
                         {{ __('Interactive courses, practical exercises & personalised coaching – from beginner (A1) to expert (C2).') }}
                     </p>
-                    <div class="flex flex-wrap justify-center gap-4 mt-8 lg:justify-start">
-                        <a href="{{ route('register') }}" class="text-lg transition-transform duration-300 shadow-xl btn btn-primary btn-wide hover:scale-105">
+                    <div class="flex flex-wrap justify-center gap-3 mt-6 lg:justify-start">
+                        <a href="{{ route('register') }}" class="text-base transition-transform duration-300 shadow-xl btn btn-primary btn-wide hover:scale-105">
                             {{ __('Start free trial') }}
                             <x-icon name="o-arrow-right" class="w-5 h-5 ml-2" />
                         </a>
                         <a href="#courses" class="btn btn-outline btn-wide">{{ __('Explore courses') }}</a>
                     </div>
-                    <div class="flex justify-center gap-6 mt-8 text-sm lg:justify-start opacity-70">
+                    <div class="flex justify-center gap-5 mt-6 text-sm lg:justify-start opacity-70">
                         <span><x-icon name="o-star" class="inline w-4 h-4 text-warning" /> 4.95 (1,200+ reviews)</span>
                         <span><x-icon name="o-users" class="inline w-4 h-4" /> 15k+ {{ __('active learners') }}</span>
                     </div>
                 </div>
-                <div class="flex justify-center flex-1" x-show="heroAnimate" x-transition:enter="transition ease-out duration-700 delay-200" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100">
-                    <div class="relative w-64 h-64 md:w-96 md:h-96">
-                        <div class="absolute inset-0 rounded-full bg-primary/20 blur-3xl animate-pulse"></div>
-                        <img src="{{ asset('images/hero-german-learning.png') }}" alt="{{ __('Student learning German online') }}" class="relative z-10 object-contain w-full h-full rounded-full shadow-2xl">
+
+                <!-- Image : occupe 3/5 sur desktop, rectangulaire arrondie -->
+                <div class="flex justify-center lg:w-7/12" x-show="heroAnimate" x-transition:enter="transition ease-out duration-700 delay-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+                    <div class="relative w-full max-w-md mx-auto lg:max-w-none">
+                        <div class="absolute inset-0 rounded-2xl bg-primary/20 blur-2xl animate-pulse"></div>
+                        <img src="{{ asset('/storage/images/hero-german-learning.png') }}"
+                            alt="{{ __('Student learning German online') }}"
+                            class="relative z-10 object-cover w-full h-auto shadow-xl rounded-2xl">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-base-200 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-base-200 to-transparent"></div>
     </section>
 
     {{-- ==================== WHY US (4 cartes MaryUI) ==================== --}}
@@ -365,7 +370,7 @@ class extends Component {
                         </div>
                     </div>
                     <div class="overflow-hidden shadow-md rounded-box">
-                        <img src="{{ asset('images/contact-support-team.jpg') }}" alt="{{ __('Support team helping students') }}" class="object-cover w-full h-auto">
+                        <img src="{{ asset('/storage/images/contact-support-team.png') }}" alt="{{ __('Support team helping students') }}" class="object-cover w-full h-auto">
                     </div>
                 </div>
             </div>

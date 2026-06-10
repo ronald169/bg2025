@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
     <title>{!! isset($title) ? $title.' - '.config('app.name') : config('app.name') !!}</title>
 
     {{-- Google Fonts --}}
@@ -11,7 +15,7 @@
 
     <script src="{{ asset('storage/tinymce/tinymce.min.js') }}"></script>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     @stack('styles')
 
     <link rel="stylesheet" href="{{ asset('tinymce-custom.css') }}">
@@ -22,7 +26,11 @@
     {{-- NAVBAR mobile uniquement --}}
     <x-nav sticky class="lg:hidden">
         <x-slot:brand>
-            <div class="text-xl font-bold text-primary"><a href="{{ route('home') }}">{{ config('app.name') }}</a></div>
+            <div class="text-xl font-bold text-primary">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('/storage/images/logo.png') }}" alt="{{ config('app.name') }} logo" class="inline-block h-8 mr-2">
+                </a>
+            </div>
         </x-slot:brand>
         <x-slot:actions>
             <label for="main-drawer" class="lg:hidden me-3">
@@ -38,7 +46,11 @@
 
             {{-- BRAND --}}
             <div class="px-5 pt-5">
-                <div class="text-2xl font-bold text-primary">AllemandExpress</div>
+                <div class="text-2xl font-bold text-primary">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('/storage/images/logo.png') }}" alt="{{ config('app.name') }} logo" class="inline-block h-8 mr-2">
+                    </a>
+                </div>
                 <div class="text-xs text-base-content/60">{{ __('Deutsch lernen online') }}</div>
             </div>
 
