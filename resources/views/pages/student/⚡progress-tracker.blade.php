@@ -193,7 +193,7 @@ class extends Component {
                                 <div class="mb-2">
                                     <div class="flex justify-between mb-1 text-sm">
                                         <span class="text-base-content/70">{{ __('Progress') }}</span>
-                                        <span class="font-medium text-primary">{{ $course->progress }}%</span>
+                                        <span class="font-medium text-primary">{{ round($course->progress) }}%</span>
                                     </div>
                                     <div class="w-full h-2 rounded-full bg-base-200">
                                         <div class="h-2 rounded-full transition-all duration-300 {{ $this->getProgressColor($course->progress) }}" style="width: {{ $course->progress }}%"></div>

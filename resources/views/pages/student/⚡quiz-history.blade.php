@@ -93,8 +93,17 @@ class extends Component {
     public function getDuration($attempt): string
     {
         if ($attempt->started_at && $attempt->completed_at) {
-            $minutes = $attempt->started_at->diffInMinutes($attempt->completed_at);
-            return $minutes . ' min';
+            $seconds = $attempt->started_at->diffInSeconds($attempt->completed_at);
+            $minutes = floor($seconds / 60);
+            $secs = $seconds % 60;
+
+            if ($minutes > 0 && $secs > 0) {
+                return "{$minutes} min {$secs} sec";
+            } elseif ($minutes > 0) {
+                return "{$minutes} min";
+            } else {
+                return "{$secs} sec";
+            }
         }
         return '-';
     }

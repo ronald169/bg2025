@@ -5,7 +5,6 @@
 
     RewriteEngine On
 
-    # Redirection HTTPS (307 conserve la méthode POST)
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=307]
 
@@ -17,7 +16,12 @@
     RewriteCond %{HTTP:x-xsrf-token} .
     RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
 
-    # Redirect Trailing Slashes If Not A Folder... (307 conserve la méthode)
+    # Redirect Trailing Slashes If Not A Folder...
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteCond %{REQUEST_URI} (.+)/$
+    # RewriteRule ^ %1 [L,R=301]
+
+    # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=307]

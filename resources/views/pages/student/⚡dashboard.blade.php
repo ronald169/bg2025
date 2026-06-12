@@ -333,7 +333,7 @@ class extends Component {
                                         <div class="mt-2">
                                             <div class="flex justify-between mb-1 text-xs">
                                                 <span>{{ __('Progress') }}</span>
-                                                <span class="font-medium text-primary">{{ $course->progress }}%</span>
+                                                <span class="font-medium text-primary">{{ round($course->progress) }}%</span>
                                             </div>
                                             <div class="w-full h-2 rounded-full bg-base-200">
                                                 <div class="h-2 rounded-full bg-primary" style="width: {{ $course->progress }}%"></div>
@@ -341,7 +341,7 @@ class extends Component {
                                         </div>
                                     </div>
                                     <div class="mt-3 md:mt-0 md:ml-4">
-                                        <x-button label="{{ __('Continue →') }}" link="{{ route('student.course.show', $course) }}" class="btn-primary btn-sm" />
+                                        <x-button icon-right="o-arrow-right" label="{{ __('Continue') }}" link="{{ route('student.course.show', $course) }}" class="btn-primary btn-sm" />
                                     </div>
                                 </div>
                             @endforeach
@@ -350,7 +350,7 @@ class extends Component {
                         <div class="py-8 text-center">
                             <x-icon name="o-academic-cap" class="w-12 h-12 mx-auto text-base-content/30" />
                             <p class="mt-2 text-base-content/60">{{ __('No courses yet') }}</p>
-                            <x-button link="{{ route('student.catalog') }}" label="{{ __('Discover courses →') }}" class="mt-4 btn-primary" />
+                            <x-button icon-right="o-arrow-right" link="{{ route('student.catalog') }}" label="{{ __('Discover courses') }}" class="mt-4 btn-primary" />
                         </div>
                     @endif
                 </x-card>
@@ -436,8 +436,8 @@ class extends Component {
                             @endforeach
                         </div>
                         <div class="mt-4 text-center">
-                            <a href="{{ route('student.catalog') }}" class="text-sm text-primary hover:underline">
-                                {{ __('All courses →') }}
+                            <a href="{{ route('student.catalog') }}" icon-right="o-arrow-right" class="text-sm text-primary hover:underline">
+                                {{ __('All courses') }}
                             </a>
                         </div>
                     </x-card>

@@ -142,7 +142,7 @@ class extends Component {
                         <div class="absolute inset-0 rounded-2xl bg-primary/20 blur-2xl animate-pulse"></div>
                         <img src="{{ asset('/storage/images/hero-german-learning.png') }}"
                             alt="{{ __('Student learning German online') }}"
-                            class="relative z-10 object-cover w-full h-auto shadow-xl rounded-2xl">
+                            class="object-cover w-full h-auto shadow-xl rounded-2xl">
                     </div>
                 </div>
             </div>

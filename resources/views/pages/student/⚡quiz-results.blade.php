@@ -17,7 +17,7 @@ class extends Component {
 
     public function mount(QuizAttempt $attempt): void
     {
-        if ($attempt->user_id !== auth()->id()) {
+        if ($attempt->user_id != auth()->id()) {
             abort(403);
         }
 
