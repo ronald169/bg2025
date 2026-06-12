@@ -118,7 +118,7 @@ class extends Component {
                 <div class="flex-1 text-center lg:text-left lg:w-5/12" x-show="heroAnimate" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-y-10" x-transition:enter-end="opacity-100 translate-y-0">
                     <h1 class="text-3xl font-bold leading-tight md:text-4xl lg:text-4xl xl:text-6xl">
                         {{ __('Master German') }} <span class="text-primary">{{ __('fast') }}</span><br>
-                        {{ __('with AllemandExpress') }}
+                        {{ __('with Manu') }}
                     </h1>
                     <p class="max-w-2xl mx-auto mt-4 text-base md:text-lg text-base-content/70 lg:mx-0">
                         {{ __('Interactive courses, practical exercises & personalised coaching – from beginner (A1) to expert (C2).') }}
