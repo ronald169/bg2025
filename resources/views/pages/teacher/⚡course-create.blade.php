@@ -251,7 +251,7 @@ class extends Component {
                 <div class="space-y-4">
                     <div class="flex gap-2">
                         <x-input wire:model="newRequirement" placeholder="{{ __('Add a requirement...') }}" class="flex-1" icon="o-plus-circle" />
-                        <x-button wire:click="addRequirement" label="{{ __('Add') }}" icon="o-plus" class="btn-primary btn-sm" />
+                        <x-button wire:click="addRequirement" label="{{ __('Add') }}" icon="o-plus" class="btn-primary" />
                     </div>
                     @if(count($requirements) > 0)
                         <div class="mt-3 space-y-2">
@@ -276,8 +276,8 @@ class extends Component {
                 </div>
                 <div class="space-y-4">
                     <div class="flex gap-2">
-                        <x-input wire:model="newLearning" placeholder="{{ __('Add a learning objective...') }}" class="flex-1" icon="o-plus-circle" />
-                        <x-button wire:click="addLearning" label="{{ __('Add') }}" icon="o-plus" class="btn-primary btn-sm" />
+                        <x-input wire:model="newLearning" placeholder="{!! __('Add a learning objective...') !!}" class="flex-1" icon="o-plus-circle" />
+                        <x-button wire:click="addLearning" label="{{ __('Add') }}" icon="o-plus" class="btn-primary" />
                     </div>
                     @if(count($what_you_will_learn) > 0)
                         <div class="mt-3 space-y-2">
@@ -303,7 +303,7 @@ class extends Component {
                 <div class="space-y-4">
                     <div class="flex gap-2">
                         <x-input wire:model="newTag" placeholder="{{ __('Add a tag...') }}" class="flex-1" icon="o-plus-circle" />
-                        <x-button wire:click="addTag" label="{{ __('Add') }}" icon="o-plus" class="btn-primary btn-sm" />
+                        <x-button wire:click="addTag" label="{{ __('Add') }}" icon="o-plus" class="btn-primary" />
                     </div>
                     @if(count($tags) > 0)
                         <div class="flex flex-wrap gap-2 mt-3">

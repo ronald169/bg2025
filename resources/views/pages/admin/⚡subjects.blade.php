@@ -367,7 +367,7 @@ class extends Component {
             <x-form wire:submit="save" no-separator>
                 <x-input wire:model="name" label="{{ __('Subject Name') }}" placeholder="{{ __('e.g. German, Mathematics, ...') }}" icon="o-tag" required />
                 <x-input wire:model="slug" label="{{ __('URL Slug') }}" placeholder="{{ __('german') }}" icon="o-link" hint="{{ __('Auto-generated from name') }}" />
-                <x-select wire:model="icon" label="{{ __('Icon') }}" :options="$icons" placeholder="{{ __('No icon') }}" />
+                <x-select wire:model="icon" label="{{ __('Icon') }}" :options="$icons" placeholder="{!! __('No icon') !!}" />
                 <x-select wire:model="color" label="{{ __('Color') }}" :options="$colors" option-value="id" option-label="name" required />
                 <x-textarea wire:model="description" label="{{ __('Description') }}" placeholder="{{ __('Short description of the subject') }}" rows="2" icon="o-document-text" />
                 <x-toggle wire:model="is_active" label="{{ __('Active') }}" hint="{{ __('Inactive subjects will not be displayed') }}" />
