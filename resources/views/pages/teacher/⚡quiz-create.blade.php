@@ -42,7 +42,7 @@ class extends Component {
 
     public function mount(Course $course, $lesson = null): void
     {
-        if ($course->teacher_id !== auth()->id()) {
+        if ($course->teacher_id != auth()->id()) {
             abort(403);
         }
 

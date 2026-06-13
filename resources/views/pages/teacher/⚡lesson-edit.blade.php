@@ -41,7 +41,7 @@ class extends Component {
 
     public function mount(Course $course, Lesson $lesson): void
     {
-        if ($course->teacher_id !== auth()->id() || $lesson->course_id !== $course->id) {
+        if ($course->teacher_id != auth()->id() || $lesson->course_id != $course->id) {
             abort(403);
         }
         $this->course = $course;
