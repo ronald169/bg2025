@@ -26,7 +26,7 @@ class extends Component {
     public ?int $quizTimeLimit = 4;
     public int $quizPassingScore = 70;
     public int $quizMaxAttempts = 3;
-    public bool $quizIsPublished = false;
+    public bool $quizIsPublished = true;
 
     // Question form
     public bool $showQuestionModal = false;
@@ -462,7 +462,7 @@ class extends Component {
         <x-modal wire:model="showQuizModal" title="{{ $editingQuiz ? __('Edit Quiz') : __('Create New Quiz') }}" separator>
             <x-form wire:submit="saveQuiz" no-separator>
                 <x-input wire:model="quizTitle" label="{{ __('Quiz Title') }}" placeholder="{{ __('e.g., Grammar Quiz A1') }}" icon="o-pencil" required />
-                <x-textarea wire:model="quizDescription" label="{{ __('Description') }}" placeholder="{{ __('What will be tested in this quiz?') }}" rows="2" icon="o-document-text" />
+                <x-textarea wire:model="quizDescription" label="{{ __('Description') }}" placeholder="{!! __('What will be tested in this quiz?') !!}" rows="2" icon="o-document-text" />
                 <x-select
                     wire:model="selectedLessonId"
                     label="{{ __('Lesson') }}"

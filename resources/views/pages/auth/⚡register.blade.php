@@ -183,6 +183,11 @@ class extends Component {
         return $quotes[array_rand($quotes)];
     }
 
+    public function loginSocial(): void
+    {
+        $this->info(__('Social login is not implemented yet. Please use email registration for now.') . ' 🤖');
+    }
+
     public function render()
     {
         return $this->view([
@@ -390,15 +395,10 @@ class extends Component {
             </div>
 
             <!-- Social Signup -->
-            <div class="grid grid-cols-2 gap-3 mb-6">
-                <a href="#" class="flex items-center justify-center px-4 py-2 text-gray-700 transition border border-gray-300 rounded-lg hover:bg-gray-50">
-                    <x-icon name="fab.google" class="w-5 h-5 mr-2" />
-                    {{ __('Google') }}
-                </a>
-                <a href="#" class="flex items-center justify-center px-4 py-2 text-gray-700 transition border border-gray-300 rounded-lg hover:bg-gray-50">
-                    <x-icon name="fab.facebook" class="w-5 h-5 mr-2" />
-                    {{ __('Facebook') }}
-                </a>
+            <div class="flex items-center justify-center gap-3 mb-6 ">
+                <x-button label="{{ __('Google') }}" icon="fab.google" wire:click="loginSocial" class="btn-primary" />
+
+                <x-button label="{{ __('Facebook') }}" icon="fab.facebook" wire:click="loginSocial" class="btn-primary" />
             </div>
 
             <!-- Login Link -->

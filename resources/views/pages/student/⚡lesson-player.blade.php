@@ -259,7 +259,7 @@ class extends Component {
         </div>
 
         {{-- Lecteur vidéo --}}
-        <x-card class="p-0 mb-6 overflow-hidden">
+        <div class="">
             <div class="flex items-center justify-center bg-gray-900 aspect-video">
                 @if($this->lesson->video_url && $videoId)
                     <iframe
@@ -280,21 +280,23 @@ class extends Component {
                     </div>
                 @endif
             </div>
-        </x-card>
+        </div>
 
         {{-- Contenu texte --}}
         @if($this->lesson->content)
-            <x-card class="mb-6">
+        <div class="my-6">
+            <x-card class="rounded-none max-sm:-mx-3">
                 <div class="prose max-w-none" id="tinymce-content">
                     {!! $this->lesson->content !!}
                 </div>
             </x-card>
+        </div>
         @endif
 
         {{-- Notes et actions (grille) --}}
         <div class="grid gap-6 md:grid-cols-2">
             {{-- Bloc Notes --}}
-            <x-card title="📝 {{ __('My notes') }}" separator>
+            <x-card title="📝 {{ __('My notes') }}" separator class="rounded-none max-sm:-mx-3">
                 <x-textarea
                     wire:model="notes"
                     placeholder="{{ __('Write your notes here...') }}"
@@ -309,7 +311,7 @@ class extends Component {
             </x-card>
 
             {{-- Bloc Actions --}}
-            <x-card title="⚡ {{ __('Actions') }}" separator>
+            <x-card title="⚡ {{ __('Actions') }}" separator class="rounded-none max-sm:-mx-3">
                 <div class="space-y-4">
                     @if(!$isCompleted)
                         <x-button wire:click="markComplete" spinner="markComplete"

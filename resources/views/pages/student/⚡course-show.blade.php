@@ -291,19 +291,15 @@ class extends Component {
         </div>
 
         {{-- Tabs Navigation --}}
-        <div class="mb-5 tabs tabs-boxed">
-            <a class="tab {{ $activeTab === 'overview' ? 'tab-active' : '' }}"
-               wire:click="$set('activeTab', 'overview')">
-                📖 {{ __('Overview') }}
-            </a>
-            <a class="tab {{ $activeTab === 'curriculum' ? 'tab-active' : '' }}"
-               wire:click="$set('activeTab', 'curriculum')">
-                📚 {{ __('Curriculum') }} ({{ $course->lessons_count ?? 0 }})
-            </a>
+        <div class="gap-3 mb-5 tabs tabs-boxed">
+            <x-button label="📖 {{ __('Overview') }}" class="tab btn-ghost {{ $activeTab === 'overview' ? 'tab-active' : '' }}"
+               wire:click="$set('activeTab', 'overview')" />
+            <x-button label="📚 {{ __('Curriculum') }} ({{ $course->lessons_count ?? 0 }})" class="tab btn-ghost {{ $activeTab === 'curriculum' ? 'tab-active' : '' }}"
+               wire:click="$set('activeTab', 'curriculum')" />
         </div>
 
         {{-- Tab Content --}}
-        <x-card class="p-4 md:p-6">
+        <x-card class="rounded-none max-sm:-mx-3">
             @if($activeTab === 'overview')
                 <div class="prose max-w-none">
                     <div class="mb-5">
@@ -361,7 +357,7 @@ class extends Component {
             @elseif($activeTab === 'curriculum')
                 <div class="space-y-3">
                     @forelse($lessons as $index => $lesson)
-                        <div class="p-3 transition border rounded-lg hover:bg-base-200">
+                        <div class="p-3 transition rounded-lg shadow hover:bg-base-200">
                             <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                                 <div class="flex items-center flex-1 gap-3">
                                     @if($isEnrolled || $lesson->is_free)
