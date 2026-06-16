@@ -23,10 +23,10 @@ Disallow: /reset-password
 Disallow: /logout
 
 # Sitemap
-Sitemap: https://allemandexpress.com/sitemap.xml
+Sitemap: https://allemandexpress.fr/sitemap.xml
 
 # Crawl delay
 Crawl-delay: 10
 
 # Host
-Host: https://allemandexpress.com
+Host: https://allemandexpress.fr
