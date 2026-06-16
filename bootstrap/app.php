@@ -20,9 +20,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             SetLocale::class,
         ]);
-        $middleware->alias([
-            'ensure.session' => \App\Http\Middleware\EnsureSessionIsValid::class,
-        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (MethodNotAllowedHttpException $e, Request $request) {
