@@ -3,12 +3,6 @@
         Options -MultiViews -Indexes
     </IfModule>
 
-    <IfModule mod_headers.c>
-        Header always set Cache-Control "no-cache, no-store, must-revalidate"
-        Header always set Pragma "no-cache"
-        Header always set Expires "0"
-    </IfModule>
-
     RewriteEngine On
 
     # Redirection HTTPS (307 conserve la méthode POST)
