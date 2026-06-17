@@ -27,6 +27,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 return redirect()->back()->with('warning', 'Votre session a expiré, veuillez réessayer.');
             }
         });
+
+        $exceptions->render(function (\Illuminate\Session\TokenMismatchException $e, Request $request) {
+            return redirect()->back()->with('error', 'La session a expiré, veuillez recharger la page.');
+        });
     })
     ->withCommands([
         SendCourseReminders::class,
