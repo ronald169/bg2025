@@ -22,15 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (MethodNotAllowedHttpException $e, Request $request) {
-            if ($request->is('livewire*')) {
-                return redirect()->back()->with('warning', 'Votre session a expiré, veuillez réessayer.');
-            }
-        });
-
-        $exceptions->render(function (\Illuminate\Session\TokenMismatchException $e, Request $request) {
-            return redirect()->back()->with('error', 'La session a expiré, veuillez recharger la page.');
-        });
+        //
     })
     ->withCommands([
         SendCourseReminders::class,
