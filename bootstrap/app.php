@@ -22,7 +22,12 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // ✅ Gestion de l'erreur 405 pour les requêtes Livewire
+        $exceptions->render(function (MethodNotAllowedHttpException $e, Request $request) {
+            if ($request->is('livewire*')) {
+                return redirect()->back()->with('error', 'Votre session a expiré, veuillez réessayer.');
+            }
+        });
     })
     ->withCommands([
         SendCourseReminders::class,

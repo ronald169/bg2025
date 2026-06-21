@@ -212,9 +212,9 @@ class extends Component {
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 @php
                     $courses = [
-                        (object)['title' => 'A1 – '.__('Beginner'), 'description' => __('First steps: greetings, basic grammar, essential vocabulary for daily life.'), 'duration' => '6 weeks', 'level' => 'A1', 'price' => __('Free')],
-                        (object)['title' => 'A2 – '.__('Elementary'), 'description' => __('Express yourself in routine situations, past tense, more confidence speaking.'), 'duration' => '8 weeks', 'level' => 'A2', 'price' => __('Free')],
-                        (object)['title' => 'B1 – '.__('Intermediate'), 'description' => __('Work and travel with ease – complex grammar, writing emails, group discussions.'), 'duration' => '12 weeks', 'level' => 'B1', 'price' => __('Free')],
+                        (object)['title' => 'A1 – '.__('Beginner'), 'description' => __('First steps: greetings, basic grammar, essential vocabulary for daily life.'), 'duration' => __('2 hours'), 'level' => 'A1', 'price' => __('Free')],
+                        (object)['title' => 'A2 – '.__('Elementary'), 'description' => __('Express yourself in routine situations, past tense, more confidence speaking.'), 'duration' => __('2 hours'), 'level' => 'A2', 'price' => __('Free')],
+                        (object)['title' => 'B1 – '.__('Intermediate'), 'description' => __('Work and travel with ease – complex grammar, writing emails, group discussions.'), 'duration' => __('2 hours'), 'level' => 'B1', 'price' => __('Free')],
                     ];
                 @endphp
                 @foreach($courses as $course)
@@ -234,7 +234,7 @@ class extends Component {
                         </div>
                         <p class="flex-1 mt-4 text-base-content/80">{{ $course->description }}</p>
                         <div class="mt-6">
-                            <a href="{{ route('register') }}" class="w-full btn btn-primary">
+                            <a href="{{ route('student.catalog') }}" class="w-full btn btn-primary">
                                 {{ __('See course') }}
                                 <x-icon name="o-arrow-right" class="w-4 h-4 ml-2" />
                             </a>
@@ -245,7 +245,6 @@ class extends Component {
             </div>
         </div>
     </section>
-
     {{-- ==================== HOW IT WORKS ==================== --}}
     <section class="py-20 bg-base-100">
         <div class="container px-4 mx-auto">

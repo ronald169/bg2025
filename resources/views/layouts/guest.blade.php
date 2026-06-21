@@ -125,7 +125,7 @@
 
         {{-- Right side actions --}}
         <x-slot:actions>
-            <x-button label="{{ __('Courses') }}" icon="o-academic-cap" link="{{ route('student.catalog') }}" class="btn-ghost btn-sm" responsive />
+            <x-button label="{{ __('Courses') }}" icon="o-academic-cap" link="{{ route('student.catalog') }}" class="btn-ghost btn-sm" />
 
             <x-dropdown class="dropdown-end">
                 {{-- Bouton déclencheur --}}
