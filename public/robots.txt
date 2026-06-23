@@ -1,21 +1,20 @@
 User-agent: *
-Allow: /
-Disallow: /admin/*
-Disallow: /teacher/*
-Disallow: /language/*
+Disallow: /admin/
+Disallow: /teacher/
+Disallow: /language/
 Disallow: /student/*/edit
-Disallow: /payment/*
-Disallow: /profile/*
-Disallow: /settings/*
-Disallow: /messages/*
-Disallow: /notifications/*
-Disallow: /flashcards/*
-Disallow: /notes/*
-Disallow: /calendar/*
-Disallow: /wishlist/*
-Disallow: /certificates/*
-Disallow: /learning-path/*
-Disallow: /progress/*
+Disallow: /payment/
+Disallow: /profile/
+Disallow: /settings/
+Disallow: /messages/
+Disallow: /notifications/
+Disallow: /flashcards/
+Disallow: /notes/
+Disallow: /calendar/
+Disallow: /wishlist/
+Disallow: /certificates/
+Disallow: /learning-path/
+Disallow: /progress/
 Disallow: /quiz/*/results
 Disallow: /login
 Disallow: /register
@@ -23,11 +22,8 @@ Disallow: /forgot-password
 Disallow: /reset-password
 Disallow: /logout
 
-# Sitemap
 Sitemap: https://allemandexpress.fr/sitemap.xml
 
-# Crawl delay
 Crawl-delay: 10
 
-# Host
 Host: https://allemandexpress.fr
