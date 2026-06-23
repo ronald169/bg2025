@@ -230,7 +230,7 @@ class extends Component {
                             </div>
                             <div class="flex gap-2 mt-3 md:mt-0">
                                 <x-button icon="o-eye" class="btn-ghost btn-sm" tooltip-left="{{ __('View') }}" link="{{ route('teacher.courses.edit', $course) }}" />
-                                <x-button label="{{ __('Manage') }}" link="{{ route('teacher.courses.edit', $course) }}" class="btn-primary btn-sm" />
+                                <x-button label="{{ __('Manage') }}" link="{{ route('teacher.lessons.create', $course) }}" class="btn-primary btn-sm" />
                             </div>
                         </div>
                     @endforeach

@@ -35,7 +35,7 @@ class extends Component {
     public string $difficultyFilter = '';
 
     // UI state
-    public bool $showFilters = false;
+    public bool $showFilters = true;
 
     public function getLevelsProperty(): array
     {
@@ -273,7 +273,7 @@ class extends Component {
         {{-- Filters Section --}}
         <x-card class="mb-6">
             <!-- Mobile filter toggle -->
-            <div class="flex items-center justify-between md:hidden">
+            <div class="flex items-center justify-between">
                 <button
                     @click="showFilters = !showFilters"
                     class="flex items-center gap-2 text-sm font-medium text-base-content/70">
