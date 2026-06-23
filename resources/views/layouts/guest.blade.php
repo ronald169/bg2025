@@ -19,8 +19,6 @@
     })(window,document,'script','dataLayer','GTM-KDJTC2ZM');</script>
     <!-- End Google Tag Manager -->
 
-    <!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/611e64fe13a064c0aecbaabfe500b3f3/script.js"></script> <!-- End cookieyes banner -->
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
