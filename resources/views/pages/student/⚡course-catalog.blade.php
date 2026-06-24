@@ -35,7 +35,7 @@ class extends Component {
     public string $difficultyFilter = '';
 
     // UI state
-    public bool $showFilters = true;
+    public bool $showFilters = false;
 
     public function getLevelsProperty(): array
     {

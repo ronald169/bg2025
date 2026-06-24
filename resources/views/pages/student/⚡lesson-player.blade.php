@@ -115,6 +115,11 @@ class extends Component {
 
     public function markComplete(): void
     {
+        if (!auth()->check()) {
+            $this->error(__('You must be logged in to complete the lesson.'));
+            return;
+        }
+
         Progress::updateOrCreate(
             [
                 'user_id'   => auth()->id(),

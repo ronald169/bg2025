@@ -1386,6 +1386,7 @@
     "Message marked as read.": "Message marqué comme lu.",
     "Filters cleared.": "Filtres effacés.",
     "Please enter a reply message.": "Veuillez saisir un message de réponse.",
-    "The reply must be at least 3 characters.": "La réponse doit contenir au moins 3 caractères."
+    "The reply must be at least 3 characters.": "La réponse doit contenir au moins 3 caractères.",
+    "You must be logged in to complete the lesson.": "Vous devez être connecté pour terminer la leçon.",
 
 }
