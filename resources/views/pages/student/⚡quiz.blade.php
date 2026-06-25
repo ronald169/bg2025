@@ -70,9 +70,8 @@ class extends Component {
     public function startQuiz()
     {
         if (!auth()->check()) {
-            $this->info(__('Log in'));
-
-            return $this->redirectIntended(route('login'), true);
+            $this->info(__('You need to be logged in to start the quiz.'));
+            return;
         }
 
         $this->attempt = QuizAttempt::create([

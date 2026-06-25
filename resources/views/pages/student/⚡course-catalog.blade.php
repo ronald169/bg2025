@@ -323,7 +323,7 @@ class extends Component {
                     />
 
                     {{-- Difficulty --}}
-                    <x-select
+                    {{-- <x-select
                         label="{{ __('Difficulty') }}"
                         wire:model.live="difficultyFilter"
                         :options="$difficulties"
@@ -333,10 +333,10 @@ class extends Component {
                         id="difficulty_filter"
                         name="difficulty_filter"
                         clearable
-                    />
+                    /> --}}
 
                     {{-- Price --}}
-                    <x-select
+                    {{-- <x-select
                         label="{{ __('Price') }}"
                         wire:model.live="priceFilter"
                         :options="$priceRanges"
@@ -346,7 +346,7 @@ class extends Component {
                         id="price_filter"
                         name="price_filter"
                         clearable
-                    />
+                    /> --}}
                 </div>
 
                 <div class="flex flex-col gap-3 pt-3 border-t border-base-200 sm:flex-row sm:items-center sm:justify-between">
