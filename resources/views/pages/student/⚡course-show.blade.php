@@ -102,8 +102,7 @@ class extends Component {
     public function enroll(): void
     {
         if (!$this->user) {
-            $this->warning(__('Log in'));
-            $this->redirectRoute('login');
+            $this->warning("You need to be logged in to enroll in this course.");
             return;
         }
         if ($this->isEnrolled) {
