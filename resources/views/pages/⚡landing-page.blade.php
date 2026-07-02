@@ -358,19 +358,19 @@ class extends Component {
                             <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
                                 <x-icon name="o-envelope" class="w-6 h-6 text-primary" />
                             </div>
-                            <span class="text-base-content">hello@allemandexpress.fr</span>
+                            <span class="text-base-content">ronalsgatsi@gmail.com</span>
                         </div>
                         <div class="flex items-center gap-4">
                             <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
                                 <x-icon name="o-phone" class="w-6 h-6 text-primary" />
                             </div>
-                            <span class="text-base-content">+49 30 12345678</span>
+                            <span class="text-base-content">+237 698672323</span>
                         </div>
                         <div class="flex items-center gap-4">
                             <div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
                                 <x-icon name="o-map-pin" class="w-6 h-6 text-primary" />
                             </div>
-                            <span class="text-base-content">Berlin, Germany</span>
+                            <span class="text-base-content">Yaoundé, Cameroon</span>
                         </div>
                     </div>
                     <div class="overflow-hidden shadow-md rounded-box">
