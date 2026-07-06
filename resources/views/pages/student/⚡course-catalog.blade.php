@@ -438,7 +438,6 @@ class extends Component {
                                 <x-badge value="🇩🇪 Free" class="badge-success badge-sm" />
                             </div>
                         @endif
-                        @endif
                     </div>
 
                     <div class="space-y-3">
