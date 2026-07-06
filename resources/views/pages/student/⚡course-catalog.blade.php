@@ -433,10 +433,13 @@ class extends Component {
                             />
                         </div>
 
-                        @if($course->price == 0)
+                        {{-- @if($course->price == 0)
                             <div class="absolute top-3 left-3">
                                 <x-badge value="🇩🇪 Free" class="badge-success badge-sm" />
                             </div>
+                        @endif --}}
+                        @if($course->subject)
+                            <x-badge :value="$course->subject->name" class="badge-soft badge-white" />
                         @endif
                     </div>
 
