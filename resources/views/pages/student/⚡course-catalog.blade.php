@@ -439,7 +439,9 @@ class extends Component {
                             </div>
                         @endif --}}
                         @if($course->subject)
-                            <x-badge :value="$course->subject->name" class="badge-soft badge-white" />
+                            <div class="absolute top-3 left-3"></div>
+                                <x-badge :value="$course->subject->name" class="badge-success badge-sm" />
+                            </div>
                         @endif
                     </div>
 
