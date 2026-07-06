@@ -439,7 +439,7 @@ class extends Component {
                             </div>
                         @endif --}}
                         @if($course->subject)
-                            <div class="absolute top-3 left-3"></div>
+                            <div class="absolute top-3 left-3">
                                 <x-badge :value="$course->subject->name" class="badge-success badge-sm" />
                             </div>
                         @endif
