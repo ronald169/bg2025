@@ -428,20 +428,16 @@ class extends Component {
 
                         <div class="absolute top-3 right-3">
                             <x-badge
-                                :value="$this->getLevelLabel($course->level)"
+                                :value="$course->subject->name . ' ' . $this->getLevelLabel($course->level)"
                                 :class="$this->getLevelBadgeClass($course->level) . ' badge-sm'"
                             />
                         </div>
 
-                        {{-- @if($course->price == 0)
+                        @if($course->price == 0)
                             <div class="absolute top-3 left-3">
                                 <x-badge value="🇩🇪 Free" class="badge-success badge-sm" />
                             </div>
-                        @endif --}}
-                        @if($course->subject)
-                            <div class="absolute top-3 left-3">
-                                <x-badge :value="$course->subject->name" class="badge-success badge-sm" />
-                            </div>
+                        @endif
                         @endif
                     </div>
 
