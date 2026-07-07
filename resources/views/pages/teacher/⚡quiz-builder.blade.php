@@ -21,8 +21,8 @@ class extends Component {
     // Quiz form
     public bool $showQuizModal = false;
     public $editingQuiz = null;
-    public string $quizTitle = '';
-    public string $quizDescription = '';
+    public string $quizTitle = 'Quiz : ';
+    public string $quizDescription = 'Évaluation finale : ';
     public ?int $quizTimeLimit = 4;
     public int $quizPassingScore = 70;
     public int $quizMaxAttempts = 3;
@@ -297,13 +297,13 @@ class extends Component {
 
     private function resetQuizForm(): void
     {
-        $this->quizTitle = '';
-        $this->quizDescription = '';
-        $this->quizTimeLimit = null;
+        $this->quizTitle = 'Quiz : ';
+        $this->quizDescription = 'Évaluation finale : ';
+        $this->quizTimeLimit = 4;
         $this->quizPassingScore = 70;
-        $this->quizMaxAttempts = 1;
-        $this->quizIsPublished = false;
-        $this->selectedLessonId = null; // Ajout
+        $this->quizMaxAttempts = 3;
+        $this->quizIsPublished = true;
+        $this->selectedLessonId = null;
     }
 
     private function resetQuestionForm(): void
