@@ -33,7 +33,7 @@ class extends Component {
     public ?int $selectedQuizId = null;
     public $editingQuestion = null;
     public string $questionText = '';
-    public string $questionType = 'multiple_choice';
+    public string $questionType = 'short_answer';
     public array $questionOptions = ['', '', '', ''];
     public string $questionCorrectAnswer = '';
     public int $questionPoints = 1;
@@ -309,7 +309,7 @@ class extends Component {
     private function resetQuestionForm(): void
     {
         $this->questionText = '';
-        $this->questionType = 'multiple_choice';
+        $this->questionType = 'short_answer';
         $this->questionOptions = ['', '', '', ''];
         $this->questionCorrectAnswer = '';
         $this->questionPoints = 1;
