@@ -17,7 +17,7 @@ class extends Component {
 
     public string $email = '';
     public string $password = '';
-    public bool $remember = false;
+    public bool $remember = true;
 
     protected function rules(): array
     {
