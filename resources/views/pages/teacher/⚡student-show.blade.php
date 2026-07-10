@@ -171,7 +171,7 @@ class extends Component {
             <x-stat title="{{ __('Courses') }}" :value="$stats['total_courses']" icon="o-academic-cap" class="text-primary" />
             <x-stat title="{{ __('Lessons') }}" :value="$stats['completed_lessons'] . '/' . $stats['total_lessons']" icon="o-book-open" class="text-success" />
             <x-stat title="{{ __('Quiz attempts') }}" :value="$stats['quiz_attempts']" icon="o-document-text" class="text-secondary" />
-            <x-stat title="{{ __('Avg quiz') }}" :value="$stats['avg_score'] . '%'" icon="o-chart-bar" class="text-warning" />
+            <x-stat title="{{ __('Avg quiz') }}" :value="round($stats['avg_score']) . '%'" icon="o-chart-bar" class="text-warning" />
         </div>
 
         {{-- Extra info row --}}
@@ -190,7 +190,7 @@ class extends Component {
                     <x-icon name="o-trophy" class="w-5 h-5 text-warning" />
                     <div>
                         <p class="text-xs text-base-content/60">{{ __('Best score') }}</p>
-                        <p class="text-lg font-bold text-warning">{{ $stats['best_score'] }}%</p>
+                        <p class="text-lg font-bold text-warning">{{ round($stats['best_score']) }}%</p>
                     </div>
                 </div>
             </div>
@@ -259,7 +259,7 @@ class extends Component {
                             <div class="mb-2">
                                 <div class="flex justify-between mb-1 text-xs">
                                     <span class="text-base-content/60">{{ __('Progress') }}</span>
-                                    <span class="font-medium {{ $this->getProgressTextColor($course->progress) }}">{{ $course->progress }}%</span>
+                                    <span class="font-medium {{ $this->getProgressTextColor($course->progress) }}">{{ round($course->progress) }}%</span>
                                 </div>
                                 <div class="w-full h-1.5 bg-base-200 rounded-full">
                                     <div class="h-1.5 rounded-full {{ $this->getProgressColor($course->progress) }}" style="width: {{ $course->progress }}%"></div>

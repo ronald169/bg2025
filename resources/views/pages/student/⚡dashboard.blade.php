@@ -281,7 +281,7 @@ class extends Component {
                 <div class="text-xs text-base-content/50">{{ __('This week') }}: {{ $this->formatDuration($stats['weekly_study_time']) }}</div>
             </x-card>
             <x-card class="text-center shadow-sm">
-                <div class="text-2xl font-bold text-primary">{{ $stats['avg_quiz_score'] }}%</div>
+                <div class="text-2xl font-bold text-primary">{{ round($stats['avg_quiz_score']) }}%</div>
                 <div class="text-sm text-base-content/70">{{ __('Quiz average') }}</div>
                 <div class="text-xs text-base-content/50">{{ $stats['quiz_count'] }} {{ __('quizzes taken') }}</div>
             </x-card>
