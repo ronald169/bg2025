@@ -109,12 +109,12 @@ class extends Component {
             });
 
         $quizActivities = QuizAttempt::where('user_id', $user->id)
-            ->with(['quiz.lesson.course'])
+            ->with(['quiz.lesson.course', 'quiz.questions'])
             ->latest('created_at')
             ->take(5)
             ->get()
             ->map(function ($attempt) {
-                $totalQuestions = $attempt->quiz->questions->count() ?? 0;
+                $totalQuestions = $attempt->quiz->questions->sum('points') ?? 0;
                 $percentage = $totalQuestions > 0 ? round(($attempt->score / $totalQuestions) * 100) : 0;
 
                 return [

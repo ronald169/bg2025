@@ -107,10 +107,15 @@ class extends Component {
         return $quiz?->questions()->count() ?? 0;
     }
 
+    public function getTotalQuizPointsProperty(): int
+    {
+        return $this->quiz?->questions()->sum('points') ?? 0;
+    }
+
     public function getQuizPercentageProperty(): ?int
     {
-        if (!$this->bestQuizScore || $this->totalQuizQuestions === 0) return null;
-        return round(($this->bestQuizScore->score / $this->totalQuizQuestions) * 100);
+        if (!$this->bestQuizScore || $this->totalQuizPoints === 0) return null;
+        return round(($this->bestQuizScore->score / $this->totalQuizPoints) * 100);
     }
 
     public function markComplete(): void
@@ -218,6 +223,7 @@ class extends Component {
             'hasQuizAttempt'       => $this->hasQuizAttempt,
             'bestQuizScore'        => $this->bestQuizScore,
             'totalQuizQuestions'   => $this->totalQuizQuestions,
+            'totalQuizPoints'      => $this->totalQuizPoints,
             'quizPercentage'       => $this->quizPercentage,
             'videoId'              => $this->getVideoId($this->lesson->video_url),
         ])->layoutData([
@@ -346,7 +352,7 @@ class extends Component {
                                     <div class="flex items-center justify-between text-sm">
                                         <span class="text-base-content/70">{{ __('Best score') }}</span>
                                         <span class="font-semibold {{ $quizPercentage >= 70 ? 'text-success' : 'text-warning' }}">
-                                            {{ $quizPercentage }}% ({{ $bestQuizScore->score }}/{{ $totalQuizQuestions }})
+                                            {{ $quizPercentage }}% ({{ $bestQuizScore->score }}/{{ $totalQuizPoints }})
                                         </span>
                                     </div>
                                 </div>
