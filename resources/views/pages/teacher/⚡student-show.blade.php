@@ -228,7 +228,7 @@ class extends Component {
                                     </td>
                                     <td class="px-4 py-3">
                                         <div class="flex items-center justify-center gap-2">
-                                            <span class="text-sm font-semibold {{ $this->getProgressTextColor($course->progress) }}">{{ $course->progress }}%</span>
+                                            <span class="text-sm font-semibold {{ round($this->getProgressTextColor($course->progress)) }}">{{ $course->progress }}%</span>
                                             <div class="w-20 h-1.5 bg-base-200 rounded-full">
                                                 <div class="h-1.5 rounded-full {{ $this->getProgressColor($course->progress) }}" style="width: {{ $course->progress }}%"></div>
                                             </div>
