@@ -404,10 +404,9 @@ class extends Component {
                             </div>
                         </div>
 
-                    @else
+                    @elseif(in_array($currentQuestion->type, ['short_answer', 'text']))
                         <textarea
-                            wire:model.change="answers.{{ $currentQuestionIndex }}"
-                            wire:change="saveAnswer($event.target.value)"
+                            wire:model.defer="answers.{{ $currentQuestion->id }}"
                             placeholder="{{ __('Enter your answer here...') }}"
                             rows="4"
                             class="w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"></textarea>
