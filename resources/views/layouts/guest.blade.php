@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
-<head>
+<ink>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKZP1L88VJ"></script>
     <script>
@@ -122,7 +122,7 @@
 
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-QF-PWt_A.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BnVce3RI.css') }}">
     <script src="{{ asset('build/assets/app-CcNNqum8.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('tinymce-custom.css') }}">
