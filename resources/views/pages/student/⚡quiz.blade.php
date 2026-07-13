@@ -406,7 +406,7 @@ class extends Component {
 
                     @else
                         <textarea
-                            wire:model.blur="answers.{{ $currentQuestionIndex }}"
+                            wire:model.change="answers.{{ $currentQuestionIndex }}"
                             wire:change="saveAnswer($event.target.value)"
                             placeholder="{{ __('Enter your answer here...') }}"
                             rows="4"
