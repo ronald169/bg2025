@@ -21,6 +21,7 @@ class extends Component {
     public bool $quizStarted = false;
     public bool $quizCompleted = false;
     public $startTime = null;
+    public int $lastSavedAt = 0; // ⬅️ Nouveau : timestamp de la dernière sauvegarde
 
     public function mount(Quiz $quiz): void
     {
@@ -35,11 +36,11 @@ class extends Component {
             $this->quizStarted = true;
             $this->startTime = $this->attempt->started_at;
             $this->answers = $this->attempt->answers ?? [];
+            $this->lastSavedAt = now()->timestamp;
             $this->calculateTimeRemaining();
         }
     }
 
-    // Getters (remplacent les anciens #[Computed])
     public function getQuestionsProperty()
     {
         return $this->quiz->questions;
@@ -75,18 +76,19 @@ class extends Component {
         }
 
         $this->attempt = QuizAttempt::create([
-            'user_id'   => auth()->id(),
-            'quiz_id'   => $this->quiz->id,
+            'user_id'    => auth()->id(),
+            'quiz_id'    => $this->quiz->id,
             'started_at' => now(),
-            'answers'   => [],
-            'score'     => 0,
-            'is_passed' => false,
+            'answers'    => [],
+            'score'      => 0,
+            'is_passed'  => false,
         ]);
 
         $this->quizStarted = true;
         $this->startTime = now();
         $this->answers = [];
         $this->currentQuestionIndex = 0;
+        $this->lastSavedAt = now()->timestamp;
         $this->calculateTimeRemaining();
         $this->dispatch('start-timer');
 
@@ -113,9 +115,28 @@ class extends Component {
             $remaining = now()->diffInSeconds($endTime, false);
             $this->timeRemaining = max(0, $remaining);
 
+            // ⬇️ Sauvegarde de secours toutes les 30 secondes
+            if (now()->timestamp - $this->lastSavedAt >= 30) {
+                $this->saveProgressToDatabase();
+            }
+
             if ($this->timeRemaining <= 0 && !$this->quizCompleted) {
                 $this->autoSubmitQuiz();
             }
+        }
+    }
+
+    /**
+     * ⬅️ Nouvelle méthode : sauvegarde périodique des réponses en BDD
+     */
+    private function saveProgressToDatabase(): void
+    {
+        if ($this->attempt && count($this->answers) > 0) {
+            $this->attempt->update([
+                'answers'          => $this->answers,
+                'last_activity_at' => now(),
+            ]);
+            $this->lastSavedAt = now()->timestamp;
         }
     }
 
@@ -126,16 +147,13 @@ class extends Component {
         $this->warning(__('Time has expired! The quiz was automatically submitted. ⏰'));
     }
 
+    /**
+     * ✅ MODIFIÉ : Plus d'appel BDD ici, juste mise à jour en mémoire
+     */
     public function saveAnswer($answer): void
     {
         $this->answers[$this->currentQuestionIndex] = $answer;
-
-        if ($this->attempt) {
-            $this->attempt->update([
-                'answers'         => $this->answers,
-                'last_activity_at' => now(),
-            ]);
-        }
+        // ⬇️ Plus d'appel à $this->attempt->update() ici !
     }
 
     public function nextQuestion(): void
@@ -172,11 +190,13 @@ class extends Component {
         $percentage = $totalPoints > 0 ? ($earnedPoints / $totalPoints) * 100 : 0;
         $passed = $percentage >= ($this->quiz->passing_score ?? 70);
 
+        // ✅ Sauvegarde finale unique en BDD
         $this->attempt->update([
             'completed_at' => now(),
             'answers'      => $this->answers,
             'score'        => $earnedPoints,
             'is_passed'    => $passed,
+            'last_activity_at' => now(),
         ]);
 
         $this->quizCompleted = true;
@@ -374,30 +394,61 @@ class extends Component {
                         @endphp
                         <div class="space-y-3">
                             @foreach($options ?? [] as $index => $option)
-                                <div class="flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition
-                                            {{ (isset($answers[$currentQuestionIndex]) && $answers[$currentQuestionIndex] == $option) ? 'border-primary bg-primary/10' : 'border-base-200 hover:bg-base-200' }}"
-                                     wire:click="saveAnswer('{{ addslashes($option) }}')">
-                                    <div class="w-6 h-6 rounded-full border flex items-center justify-center text-sm font-medium
-                                                {{ (isset($answers[$currentQuestionIndex]) && $answers[$currentQuestionIndex] == $option) ? 'bg-primary border-primary text-white' : 'border-base-300' }}">
+                                {{-- ✅ FEEDBACK INSTANTANÉ avec Alpine.js --}}
+                                <div x-data="{
+                                        isSelected: @js(isset($answers[$currentQuestionIndex]) && $answers[$currentQuestionIndex] == $option)
+                                    }"
+                                    @click="
+                                        isSelected = true;
+                                        // Désélectionner les autres options
+                                        $dispatch('deselect-other', { except: {{ $index }} });
+                                    "
+                                    @deselect-other.window="if ($event.detail.except !== {{ $index }}) isSelected = false"
+                                    wire:click="saveAnswer('{{ addslashes($option) }}')"
+                                    class="flex items-center gap-3 p-3 transition border rounded-lg cursor-pointer"
+                                    :class="isSelected ? 'border-primary bg-primary/10' : 'border-base-200 hover:bg-base-200'"
+                                    wire:loading.class="opacity-50"
+                                    wire:target="saveAnswer">
+
+                                    <div class="flex items-center justify-center w-6 h-6 text-sm font-medium transition border rounded-full"
+                                        :class="isSelected ? 'bg-primary border-primary text-white' : 'border-base-300'">
                                         {{ chr(65 + $index) }}
                                     </div>
                                     <span class="flex-1">{{ $option }}</span>
+
+                                    {{-- Spinner de chargement discret --}}
+                                    <span wire:loading wire:target="saveAnswer" class="ml-auto">
+                                        <x-icon name="o-arrow-path" class="w-4 h-4 animate-spin text-primary" />
+                                    </span>
                                 </div>
                             @endforeach
                         </div>
 
                     @elseif($currentQuestion->type === 'true_false')
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="cursor-pointer" wire:click="saveAnswer('true')">
-                                <div class="p-4 border-2 rounded-xl text-center transition
-                                            {{ (isset($answers[$currentQuestionIndex]) && $answers[$currentQuestionIndex] === 'true') ? 'border-success bg-success/10' : 'border-base-200 hover:border-success/50' }}">
+                            {{-- ✅ Vrai avec feedback instantané --}}
+                            <div x-data="{ isSelected: @js(isset($answers[$currentQuestionIndex]) && $answers[$currentQuestionIndex] === 'true') }"
+                                @click="isSelected = true"
+                                wire:click="saveAnswer('true')"
+                                class="cursor-pointer">
+                                <div class="p-4 text-center transition border-2 rounded-xl"
+                                    :class="isSelected ? 'border-success bg-success/10' : 'border-base-200 hover:border-success/50'"
+                                    wire:loading.class="opacity-50"
+                                    wire:target="saveAnswer">
                                     <x-icon name="o-check-circle" class="w-8 h-8 mx-auto mb-2 text-success" />
                                     <span class="font-medium text-success">{{ __('True') }}</span>
                                 </div>
                             </div>
-                            <div class="cursor-pointer" wire:click="saveAnswer('false')">
-                                <div class="p-4 border-2 rounded-xl text-center transition
-                                            {{ (isset($answers[$currentQuestionIndex]) && $answers[$currentQuestionIndex] === 'false') ? 'border-error bg-error/10' : 'border-base-200 hover:border-error/50' }}">
+
+                            {{-- ✅ Faux avec feedback instantané --}}
+                            <div x-data="{ isSelected: @js(isset($answers[$currentQuestionIndex]) && $answers[$currentQuestionIndex] === 'false') }"
+                                @click="isSelected = true"
+                                wire:click="saveAnswer('false')"
+                                class="cursor-pointer">
+                                <div class="p-4 text-center transition border-2 rounded-xl"
+                                    :class="isSelected ? 'border-error bg-error/10' : 'border-base-200 hover:border-error/50'"
+                                    wire:loading.class="opacity-50"
+                                    wire:target="saveAnswer">
                                     <x-icon name="o-x-circle" class="w-8 h-8 mx-auto mb-2 text-error" />
                                     <span class="font-medium text-error">{{ __('False') }}</span>
                                 </div>
@@ -405,25 +456,60 @@ class extends Component {
                         </div>
 
                     @elseif(in_array($currentQuestion->type, ['short_answer', 'text']))
-                        <textarea
-                            wire:model.defer="answers.{{ $currentQuestion->id }}"
+                        <x-textarea
+                            wire:key="answer-input-{{ $currentQuestion->id }}"
+                            wire:model.blur="answers.{{ $currentQuestionIndex }}"
+                            wire:change="saveAnswer($event.target.value)"
+                            label="{{ __('Your answer') }}"
                             placeholder="{{ __('Enter your answer here...') }}"
                             rows="4"
-                            class="w-full px-4 py-3 border rounded-lg focus:ring-primary focus:border-primary"></textarea>
+                            class="w-full"
+                        />
                     @endif
                 </div>
 
-                {{-- Navigation --}}
+                {{-- Navigation avec loading indicators --}}
                 <div class="flex items-center justify-between pt-4 border-t">
-                    <x-button wire:click="previousQuestion" label="{{ __('Previous') }}" icon="o-arrow-left" class="btn-ghost" :disabled="$currentQuestionIndex === 0" />
+                    <x-button
+                        wire:click="previousQuestion"
+                        label="{{ __('Previous') }}"
+                        icon="o-arrow-left"
+                        class="btn-ghost"
+                        :disabled="$currentQuestionIndex === 0"
+                        wire:loading.attr="disabled"
+                        wire:target="previousQuestion" />
+
                     <div class="flex gap-2">
                         @if($currentQuestionIndex < $totalQuestions - 1)
-                            <x-button wire:click="nextQuestion" label="{{ __('Next') }}" icon-right="o-arrow-right" class="btn-primary" />
+                            <x-button
+                                wire:click="nextQuestion"
+                                label="{{ __('Next') }}"
+                                icon-right="o-arrow-right"
+                                class="btn-primary"
+                                wire:loading.attr="disabled"
+                                wire:target="nextQuestion">
+                                <span wire:loading wire:target="nextQuestion">
+                                    <x-icon name="o-arrow-path" class="w-4 h-4 animate-spin" />
+                                </span>
+                            </x-button>
                         @else
-                            <x-button wire:click="submitQuiz" label="{{ __('Submit quiz') }}" icon="o-check" class="btn-success" wire:confirm="{{ __('Are you sure you want to submit the quiz?') }}" />
+                            <x-button
+                                wire:click="submitQuiz"
+                                label="{{ __('Submit quiz') }}"
+                                icon="o-check"
+                                class="btn-success"
+                                wire:confirm="{{ __('Are you sure you want to submit the quiz?') }}"
+                                wire:loading.attr="disabled"
+                                wire:target="submitQuiz">
+                                <span wire:loading wire:target="submitQuiz">
+                                    <x-icon name="o-arrow-path" class="w-4 h-4 animate-spin" />
+                                </span>
+                            </x-button>
                         @endif
                     </div>
                 </div>
+
+
             </x-card>
 
         @else

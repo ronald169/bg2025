@@ -358,13 +358,13 @@ class extends Component {
                                 </div>
                             @endif
 
-                            {{-- <x-button
+                            <x-button
                                 link="{{ route('student.quiz.show', $quiz) }}"
                                 :label="$hasQuizAttempt ? __('Retake quiz') : __('Start quiz')"
                                 icon="o-document-text"
                                 :class="$hasQuizAttempt ? 'btn-outline' : 'btn-primary'"
                                 class="w-full"
-                            /> --}}
+                            />
 
                             @if($quiz->time_limit)
                                 <p class="mt-2 text-xs text-base-content/60">
