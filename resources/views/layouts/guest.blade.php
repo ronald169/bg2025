@@ -14,6 +14,7 @@
     <!-- Google Adsence -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8616801762736489"
      crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-8616801762736489">
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
