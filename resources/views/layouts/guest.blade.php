@@ -11,7 +11,7 @@
         gtag('config', 'G-JKZP1L88VJ');
     </script>
 
-    <!-- Google Adscence -->
+    <!-- Google Adsence -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8616801762736489"
      crossorigin="anonymous"></script>
 
