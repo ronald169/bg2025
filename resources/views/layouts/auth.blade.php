@@ -12,10 +12,10 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="stylesheet" href="{{ asset('build/assets/app-CAWMuCHf.css') }}">
-    <script src="{{ asset('build/assets/app-CcNNqum8.js') }}"></script>
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-CAWMuCHf.css') }}">
+    <script src="{{ asset('build/assets/app-CcNNqum8.js') }}"></script> --}}
 
     @livewireStyles
     @stack('styles')

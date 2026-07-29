@@ -1389,6 +1389,10 @@
     "The reply must be at least 3 characters.": "La réponse doit contenir au moins 3 caractères.",
     "You must be logged in to complete the lesson.": "Vous devez être connecté pour terminer la leçon.",
     "You need to be logged in to start the quiz.": "Vous devez être connecté pour commencer le quiz.",
-    "You need to be logged in to enroll in this course.": "Vous devez être connecté pour vous inscrire à ce cours."
+    "You need to be logged in to enroll in this course.": "Vous devez être connecté pour vous inscrire à ce cours.",
+    "All pages": "Toutes les pages",
+    "Add a page": "Ajouter une page",
+    "Edit page": "Modifier la page",
+    "Page added with success.": "Page ajoutée avec succès."
 
 }

@@ -41,6 +41,7 @@ Route::livewire('/course/{course:slug}', 'pages::student.course-show')->name('st
 Route::livewire('/course/{course:slug}/lesson/{lesson:slug}', 'pages::student.lesson-player')->name('student.lesson.show');
 Route::livewire('/catalog', 'pages::student.course-catalog')->name('student.catalog');
 Route::livewire('/quiz/{quiz}', 'pages::student.quiz')->name('student.quiz.show');
+// Route::livewire('/quiz/{quiz}/one-page', 'pages::student.quiz-one-page')->name('student.quiz.one-page');
 
 
 
@@ -196,6 +197,11 @@ Route::middleware('auth')->group(function () {
 
         // Contacts
         Route::livewire('/contacts', 'pages::admin.contacts')->name('contacts');
+
+        // Pages
+        Route::livewire('/pages', 'pages::admin.pages')->name('pages');
+        Route::livewire('/pages/create', 'pages::admin.pages-create')->name('pages.create');
+        Route::livewire('/pages/{page:slug}/edit', 'pages::admin.pages-edit')->name('pages.edit');
     });
 });
 

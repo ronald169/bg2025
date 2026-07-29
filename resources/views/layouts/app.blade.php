@@ -111,6 +111,10 @@
                     <x-menu-item title="{{__('Rapports')}}" icon="o-document-text" link="{{ route('admin.reports') }}" />
                     <x-menu-item title="{{__('Contact')}}" icon="o-envelope" link="{{ route('admin.contacts') }}" />
                     <x-menu-item title="{{__('Settings')}}" icon="o-cog-6-tooth" link="{{ route('admin.settings') }}" />
+                    <x-menu-sub title="{{ __('Pages') }}" icon="o-document">
+                        <x-menu-item title="{{ __('All pages') }}" link="{{ route('admin.pages') }}" />
+                        <x-menu-item title="{{ __('Add a page') }}" link="{{ route('admin.pages.create') }}" />
+                    </x-menu-sub>
                 @endif
 
                 {{-- Paramètres généraux (tous rôles) --}}

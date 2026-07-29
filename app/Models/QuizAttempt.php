@@ -12,6 +12,7 @@ class QuizAttempt extends Model
 
     protected $casts = [
         'answers' => 'array',
+        'flagged_questions' => 'array',
         'started_at' => 'datetime',
         'completed_at' => 'datetime',
         'is_passed' => 'boolean',
