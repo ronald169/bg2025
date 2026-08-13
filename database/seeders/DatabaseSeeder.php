@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             LearningPathsTableSeeder::class,
             NotesTableSeeder::class,
             ConversationsTableSeeder::class,
-            MessagesTableSeeder::class,
+            // MessagesTableSeeder::class,
+            ExamLesenSeeder::class,
         ]);
     }
 }
